@@ -1,698 +1,866 @@
-Git Cheat Sheet Arabic [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
-===============
+# الدليل المرجعي لـ Git و Git Flow
+[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
-<div dir = rtl>
+<p align="center">
+    <img alt="Git" src="../Img/git-logo.png" height="190" width="455">
+</p>
 
-### الفهرس
-* [الإنشاء](#الإنشاء)
-* [التعديلات المحلية](#التعديلات-المحلية)
-* [المؤشر](#المؤشر)
-* [للتراجع](#للتراجع)
-* [للحذف](#للحذف)
-* [لنقل الملفات](#لنقل-الملفات)
-* [التفاصيل التاريخية](#التفاصيل-التاريخية)
-* [مستودع الشفيرة](#مستودع-الشفيرة)
-* [للإختصارات والأسماء مسـتعارة](#للإختصارات-والأسماء-مسـتعارة)
-* [للتنظيف](#للتنظيف)
+---
 
-## الإنشاء
+## 📖 حول هذا الدليل
 
-##### لإنشـاء مسـتودع فـارغ:
+هذا الدليل المرجعي الشامل لـ Git يساعدك على إتقان أوامر Git دون الحاجة لحفظ كل شيء. سواء كنت مبتدئاً أو مطوراً ذا خبرة، يوفر هذا الدليل مرجعاً سريعاً لعمليات Git الأساسية.
 
-<div dir = ltr>
+**نرحب بالمساهمات!** لا تتردد في:
+- إصلاح الأخطاء الإملائية
+- إضافة أوامر جديدة
+- الترجمة إلى لغتك
+- تحسين الشروحات
 
-```
-$ git init 
-```
-</div>
+---
+## 📋 جدول المحتويات
 
-## التعديلات المحلية
+- [🔧 الإعداد](#-الإعداد)
+- [⚙️ ملفات الإعداد](#️-ملفات-الإعداد)
+- [🆕 إنشاء مستودع](#-إنشاء-مستودع)
+- [📝 التغييرات المحلية](#-التغييرات-المحلية)
+- [🔍 البحث](#-البحث)
+- [📖 سجل الإيداعات](#-سجل-الإيداعات)
+- [📁 النقل / إعادة التسمية](#-النقل--إعادة-التسمية)
+- [🌿 الفروع والعلامات](#-الفروع-والعلامات)
+- [🔄 التحديث والنشر](#-التحديث-والنشر)
+- [🔀 الدمج وإعادة التأسيس](#-الدمج-وإعادة-التأسيس)
+- [↩️ التراجع](#️-التراجع)
+- [🌊 Git Flow](#-git-flow)
+- [🌍 لغات أخرى](#-لغات-أخرى)
 
-##### لإضافة ملف:
-
-<div dir = ltr>
-
-```
-$ git add <file_name>
-```
-</div>
+---
 
-__مثال على ذلك:__
+## 🔧 الإعداد
 
-<div dir = ltr>
+### عرض الإعدادات
 
-```
-$ git add home.php
-$ git add contact.php
-$ git add admin.php
+**عرض الإعدادات الحالية:**
+```bash
+git config --list
 ```
-</div>
 
-##### لإضافة العديد من الملفات:
-
-<div dir = ltr>
-
-```
-$ git add .
+**عرض إعدادات المستودع:**
+```bash
+git config --local --list
 ```
-</div>
 
-##### للتخزيـن الفعـلي للتعديـلات و حفظها:
-
-<div dir = ltr>
-
+**عرض الإعدادات العامة:**
+```bash
+git config --global --list
 ```
-$ git commit -m 'reason here..'
-```
-</div>
-
-##### للتراجـع عـن العمليـات و التعديـلات التـي تقـوم بهـا:
-
-<div dir = ltr>
 
+**عرض إعدادات النظام:**
+```bash
+git config --system --list
 ```
-$ git commit --amend
-```
-</div>
-
-__مثال يوضح كيفية إضافة ملف بعد عمل commit:__
 
-<div dir = ltr>
+### إعداد المستخدم
 
+**تعيين اسمك لسجل الإصدارات:**
+```bash
+git config --global user.name "[firstname lastname]"
 ```
-$ git commit -m 'initial commit'
-$ git add file.cpp
-$ git commit --amend
-```
-</div>
-
-##### لعرض تفاصيل عن حالة الملفات: 
-
-<div dir = ltr>
 
+**تعيين بريدك الإلكتروني:**
+```bash
+git config --global user.email "[valid-email]"
 ```
-$ git status
-```
-</div>
-
-##### للحصول على تقرير مختصر عن حالة الملفات:
 
-<div dir = ltr>
+### إعدادات العرض والمحرر
 
+**تفعيل التلوين التلقائي لسطر الأوامر:**
+```bash
+git config --global color.ui auto
 ```
-$ git status --short
-```
-</div>
-
-##### للحصول على تقرير مختصر حول حالة المشروع والتعديلات الحالية:
-
-<div dir = ltr>
 
+**تعيين المحرر العام للإيداعات:**
+```bash
+git config --global core.editor vi
 ```
-$ git status -s
-```
-</div>
-
-##### إلغاء كل التعديلات والعودة للنسخة التي كنت عليها قبل البدء في التعديل:
 
-<div dir = ltr>
-
-```
-$ git checkout -- <file_name>
-```
-</div>
+---
 
-__مثال على ذلك:__
+## ⚙️ ملفات الإعداد
 
-<div dir = ltr>
+| النطاق | الموقع | خيار الأمر |
+|--------|--------|------------|
+| **المستودع** | `<repo>/.git/config` | `--local` |
+| **المستخدم** | `~/.gitconfig` | `--global` |
+| **النظام** | `/etc/gitconfig` | `--system` |
 
-```
-$ git checkout -- file.java
-```
-</div>
+---
 
-##### لحفظ حالة التفرع على ما هي عليه حتى تعود إليها مرة أخرى وتكمل العمل دون أن تحفظ أي Commit:
+## 🆕 إنشاء مستودع
 
-<div dir = ltr>
+### استنساخ مستودع موجود
 
+**عبر SSH:**
+```bash
+git clone ssh://user@domain.com/repo.git
 ```
-$ git stash
-```
-</div>
 
-##### لمعرفـة قائمة الحـالات التـي قمـت بتخزينهـا لكي تسـاعدك في الرجـوع للحالـة التي تريدها:
+**عبر HTTPS:**
+```bash
+git clone https://domain.com/user/repo.git
+```
 
-<div dir = ltr>
+### تهيئة مستودع جديد
 
+**إنشاء مستودع في المجلد الحالي:**
+```bash
+git init
 ```
-$ git stash list
+
+**إنشاء مستودع في مجلد محدد:**
+```bash
+git init <directory>
 ```
-</div>
 
-##### لعرض قائمة بالحالات التي قمت بتخزينها من قبل وبإمكانك الرجوع لأي منها، أي عمل Reapply:
+---
 
-<div dir = ltr>
+## 📝 التغييرات المحلية
 
+### فحص الحالة والاختلافات
+
+**عرض حالة مجلد العمل:**
+```bash
+git status
 ```
-$ git stash apply
+
+**عرض التغييرات في الملفات المتتبعة:**
+```bash
+git diff
 ```
-</div>
 
-##### للعـودة لأحـد الحـالات المخزنـة مسـبقاً، فبإمكانـك اسـتخدام الاسـم الـذي يظهـر مـع تلـك الحالـة عنـد القيـام بتنفيـذ الأمـر:
+**عرض التغييرات في ملف محدد:**
+```bash
+git diff <file>
+```
 
-<div dir = ltr>
+### تحضير التغييرات
 
+**إضافة جميع التغييرات الحالية:**
+```bash
+git add .
 ```
-$ git stash apply stash@{2}
-```
-</div>
 
-## المؤشر
+**إضافة ملفات محددة:**
+```bash
+git add <filename1> <filename2>
+```
 
-##### لعرض قائمة Tags:
+**إضافة أجزاء من ملف بشكل تفاعلي:**
+```bash
+git add -p <file>
+```
 
-<div dir = ltr>
+### إيداع التغييرات
 
-```
-$ git tag
+**إيداع جميع تغييرات الملفات المتتبعة:**
+```bash
+git commit -a
 ```
-</div>
 
-##### للبحث عن Tags:
+**إيداع التغييرات المحضّرة:**
+```bash
+git commit
+```
 
-<div dir = ltr>
+**إيداع مع رسالة:**
+```bash
+git commit -m 'message here'
+```
 
+**تخطي التحضير والإيداع مع رسالة:**
+```bash
+git commit -am 'message here'
 ```
-$ git tag -l <صيغة معينة>
+
+**إيداع بتاريخ محدد:**
+```bash
+git commit --date="`date --date='n day ago'`" -am "<Commit Message Here>"
 ```
-</div>
 
-__مثال على ذلك:__
+### تعديل آخر إيداع
 
-<div dir = ltr>
+> ⚠️ **تحذير:** لا تعدّل الإيداعات المنشورة!
 
+**تعديل آخر إيداع:**
+```bash
+git commit -a --amend
 ```
-$ git tag -l "v1.7*"
-```
-</div>
-
-##### لإنشاء Annotated Tag:
 
-<div dir = ltr>
-
+**تعديل بدون تغيير رسالة الإيداع:**
+```bash
+git commit --amend --no-edit
 ```
-$ git tag -a v1.8.0 -m 'version 1.8'
-# 💡للتوضيح Tag name is: v1.8.0, After -m you just write a message that will be saved with the tag.
+
+**تغيير تاريخ المودع:**
+```bash
+GIT_COMMITTER_DATE="date" git commit --amend
 ```
-</div>
 
-##### لإنشاء Lightweight Tag:
+**تغيير تاريخ المؤلف:**
+```bash
+git commit --amend --date="date"
+```
 
-<div dir = ltr>
+### تخزين التغييرات مؤقتاً
 
+**حفظ التغييرات الحالية مؤقتاً:**
+```bash
+git stash
 ```
-$ git tag v1.8.0 
-```
-</div>
 
-##### لرؤية تفاصيل أكثر عن Tag:
+**تطبيق آخر تغييرات مخزنة:**
+```bash
+git stash apply
+```
 
-<div dir = ltr>
+**تطبيق تخزين محدد:**
+```bash
+git stash apply stash@{stash_number}
+```
+> استخدم `git stash list` لعرض التخزينات المتاحة
 
+**حذف آخر تخزين:**
+```bash
+git stash drop
 ```
-$ git show v1.8.0 
+
+**نقل التغييرات غير المودعة إلى فرع آخر:**
+```bash
+git stash
+git checkout branch2
+git stash pop
 ```
-</div>
 
-## للتراجع
+---
 
-##### للتراجع ولجعل الملف بحالة Unstage:
+## 🔍 البحث
 
-<div dir = ltr>
+### البحث في النصوص
 
-```
-$ git reset HEAD <file_name>
+**البحث عن نص في جميع الملفات:**
+```bash
+git grep "Hello"
 ```
-</div>
 
-__مثال على ذلك:__
+**البحث في إصدار محدد:**
+```bash
+git grep "Hello" v2.5
+```
 
-<div dir = ltr>
+### البحث في الإيداعات
 
+**البحث عن إيداعات أضافت كلمة مفتاحية محددة:**
+```bash
+git log -S 'keyword'
 ```
-$ git reset HEAD myCode.c
+
+**البحث بتعبير نمطي:**
+```bash
+git log -S 'keyword' --pickaxe-regex
 ```
-</div>
 
-## للحذف
+---
 
-##### لحذف ملف وإلغاء متابعته:
+## 📖 سجل الإيداعات
 
-<div dir = ltr>
+### السجل الأساسي
 
+**عرض جميع الإيداعات (مفصل):**
+```bash
+git log
 ```
-$ git rm <file_name>
-$ git commit -m 'reason here..'
-```
-</div>
-
-__مثال على ذلك:__
-
-<div dir = ltr>
 
+**عرض الإيداعات (سطر واحد لكل إيداع):**
+```bash
+git log --oneline
 ```
-$ git rm myFile.py
-$ git commit -m 'Delete myFile.py 🐍'
+
+**عرض إيداعات مؤلف محدد:**
+```bash
+git log --author="username"
 ```
-</div>
 
-__مثال يوضح كيفية حذف جميع ملفات txt in settings folder:__
+**عرض التغييرات لملف محدد:**
+```bash
+git log -p <file>
+```
 
-<div dir = ltr>
+### السجل المتقدم
 
+**مقارنة الفروع:**
+```bash
+git log --oneline <origin/master>..<remote/master> --left-right
 ```
-$ git rm settings/\*.txt
-$ git commit -m 'Delete all .txt files in settings folder'
-```
-</div>
 
-##### لحذف المتابعة مع بقاء الملف نفسه:
+**عرض من غيّر ماذا ومتى:**
+```bash
+git blame <file>
+```
 
-<div dir = ltr>
+### سجلات المراجع
 
+**عرض سجل المراجع:**
+```bash
+git reflog show
 ```
-$ git rm --cached <file_name>
+
+**حذف سجل المراجع:**
+```bash
+git reflog delete
 ```
-</div>
 
-__مثال على ذلك:__
+---
 
-<div dir = ltr>
+## 📁 النقل / إعادة التسمية
 
+**إعادة تسمية ملف:**
+```bash
+git mv Index.txt Index.html
 ```
-$ git rm --cached myFile.py
-```
-</div>
 
-## لنقل الملفات
+---
 
-##### لنقل الملف من مجلد إلى مجلد:
+## 🌿 الفروع والعلامات
 
-<div dir = ltr>
+### عرض الفروع
 
-```
-$ git mv <source> <destination>
+**عرض الفروع المحلية:**
+```bash
+git branch
 ```
-</div>
 
-__مثال يوضح نقل base.rb ➡️ lib folder:__
-
-<div dir = ltr>
+**عرض جميع الفروع (محلية + بعيدة):**
+```bash
+git branch -a
+```
 
+**عرض الفروع البعيدة:**
+```bash
+git branch -r
 ```
-$ git mv base.rb lib/base.rb
+
+**عرض الفروع المدمجة:**
+```bash
+git branch --merged
 ```
-</div>
 
-##### ويمكنك إستخدام الأمر لإعادة تسميه ملف:
+### التبديل وإنشاء الفروع
 
-<div dir = ltr>
+**التبديل إلى فرع موجود:**
+```bash
+git checkout <branch>
+```
 
+**إنشاء والتبديل إلى فرع جديد:**
+```bash
+git checkout -b <branch>
 ```
-$ git mv <old_file_name> <new_file_name>
+
+**التبديل إلى الفرع السابق:**
+```bash
+git checkout -
 ```
-</div>
 
-__مثال على ذلك:__
+**إنشاء فرع من فرع موجود:**
+```bash
+git checkout -b <new_branch> <existing_branch>
+```
 
-<div dir = ltr>
+**إنشاء فرع من إيداع محدد:**
+```bash
+git checkout <commit-hash> -b <new_branch_name>
+```
 
+**إنشاء فرع بدون التبديل إليه:**
+```bash
+git branch <new-branch>
 ```
-$ git mv core.java base.java
+
+**إنشاء فرع تتبع:**
+```bash
+git branch --track <new-branch> <remote-branch>
 ```
-</div>
 
-## التفاصيل التاريخية
+### عمليات الفروع
 
-##### لرؤية التفاصيل السابقة للمستودع الذي تعمل عليه:
+**استخراج ملف واحد من فرع آخر:**
+```bash
+git checkout <branch> -- <filename>
+```
 
-<div dir = ltr>
+**تطبيق إيداع محدد من فرع آخر:**
+```bash
+git cherry-pick <commit hash>
+```
 
+**إعادة تسمية الفرع الحالي:**
+```bash
+git branch -m <new_branch_name>
 ```
-$ git log
+
+**حذف فرع محلي:**
+```bash
+git branch -d <branch>
 ```
-</div>
 
-##### لرؤية التفاصيل السابقة للمستودع الذي تعمل عليه ولتحديد عدد commits:
+**حذف فرع محلي بالقوة:**
+```bash
+git branch -D <branch>
+```
+> ⚠️ **تحذير:** ستفقد التغييرات غير المدمجة!
 
-<div dir = ltr>
+### العلامات
 
+**إنشاء علامة عند HEAD:**
+```bash
+git tag <tag-name>
 ```
-$ git log -n    # 💡للتوضيح: n هو مجرد عدد
-```
-</div>
 
-__مثال على ذلك:__
+**إنشاء علامة مشروحة:**
+```bash
+git tag -a <tag-name>
+```
 
-<div dir = ltr>
+**إنشاء علامة مع رسالة:**
+```bash
+git tag <tag-name> -am 'message here'
+```
 
+**عرض جميع العلامات:**
+```bash
+git tag
 ```
-$ git log -2
+
+**عرض العلامات مع الرسائل:**
+```bash
+git tag -n
 ```
-</div>
 
-#####  لمعرفة تفاصيل أكثر عن commits:
+---
 
-<div dir = ltr>
+## 🔄 التحديث والنشر
 
-```
-$ git log -p
+### إدارة المستودعات البعيدة
+
+**عرض المستودعات البعيدة المُعدّة:**
+```bash
+git remote -v
 ```
-</div>
 
-##### لرؤية عدد من الإحصائيات بشكل مختصر:
+**عرض معلومات المستودع البعيد:**
+```bash
+git remote show <remote>
+```
 
-<div dir = ltr>
+**إضافة مستودع بعيد جديد:**
+```bash
+git remote add <remote> <url>
+```
 
+**إعادة تسمية مستودع بعيد:**
+```bash
+git remote rename <remote> <new_remote>
 ```
-$ git log -stat
+
+**حذف مستودع بعيد:**
+```bash
+git remote rm <remote>
 ```
-</div>
+> ℹ️ **ملاحظة:** هذا يحذف المرجع البعيد محلياً فقط، وليس المستودع البعيد نفسه.
 
-##### لعرض المعلومات بطريقة مبسطة وبسطر واحد:
+### الجلب والسحب
 
-<div dir = ltr>
+**تنزيل التغييرات بدون دمج:**
+```bash
+git fetch <remote>
+```
 
+**تنزيل ودمج التغييرات:**
+```bash
+git pull <remote> <branch>
 ```
-$ git log --pretty=oneline
+
+**الحصول على التغييرات من الفرع الرئيسي:**
+```bash
+git pull origin master
 ```
-</div>
 
-##### لتحديـد طريقـة العـرض التـي تريدهـا و المعلومـات التـي تريـد وضعهـا:
+**السحب مع إعادة التأسيس:**
+```bash
+git pull --rebase <remote> <branch>
+```
 
-<div dir = ltr>
+### الدفع والنشر
 
+**نشر التغييرات المحلية:**
+```bash
+git push <remote> <branch>
 ```
-$ git log --pretty=format:<طريقة العرض التي تريدها>
-```
-</div>
-
-__مثال على ذلك:__
 
-<div dir = ltr>
+**حذف فرع بعيد:**
+```bash
+# Git v1.7.0+
+git push <remote> --delete <branch>
 
+# Git v1.5.0+
+git push <remote> :<branch>
 ```
-$ git log --pretty=format:"%h - %an, %ar"
-```
-</div>
 
-__شرح لبعض أهم الرموز المتاحة:__
+**نشر العلامات:**
+```bash
+git push --tags
+```
 
-|الرمز | معناه|
-|:---:|:---:|
-| %H | هو الرقم الذي يأتي مع commit hash 🔖 commit |
-| %h | نفس السابق ولكن يعرض بطريقة مختصرة أي عدد محدد من الأرقام |
-| %an | من قام بعمل التعديلات Author Name 🙋🏻  |
-| %ae |  بريد من قام بالتعديلات Author Email 📧 |
-| %ar |  تاريخ إضافة التعديلات Author Date 📆 |
-| %s | الرسالة أو النص الذي يوضح سبب التعديلات|
+---
 
+## 🔀 الدمج وإعادة التأسيس
 
-##### لتحديـد المخرجـات زمنيـًا:
+### عمليات الدمج
 
-<div dir = ltr>
+**دمج فرع في HEAD الحالي:**
+```bash
+git merge <branch>
+```
 
+**إعداد أداة الدمج عامة:**
+```bash
+git config --global merge.tool meld
 ```
-$ git log --since=<المدة الزمنية التي تريدها>
+
+**استخدام أداة الدمج المُعدّة:**
+```bash
+git mergetool
 ```
-</div>
 
-__مثال يوضح المدة الزمنية قبل أسبوعين:__
+### عمليات إعادة التأسيس
 
-<div dir = ltr>
+> ⚠️ **تحذير:** لا تعد تأسيس الإيداعات المنشورة!
 
+**إعادة تأسيس HEAD الحالي على فرع:**
+```bash
+git rebase <branch>
 ```
-$ git log --since=2.weeks
+
+**إلغاء إعادة التأسيس:**
+```bash
+git rebase --abort
 ```
-</div>
 
-##### الـ commits التي في تعديلاتها نص معين:
+**متابعة إعادة التأسيس بعد حل التعارضات:**
+```bash
+git rebase --continue
+```
 
-<div dir = ltr>
+### حل التعارضات
 
+**وضع علامة على ملف كمحلول:**
+```bash
+git add <resolved-file>
 ```
-$ git log -S <النص الذي تريده>
-```
-</div>
 
-__مثال يوضح البحث عن myFunction:__
+**حذف ملف محلول:**
+```bash
+git rm <resolved-file>
+```
 
-<div dir = ltr>
+### ضغط الإيداعات
 
+**إعادة تأسيس تفاعلية لضغط الإيداعات:**
+```bash
+git rebase -i <commit-just-before-first>
 ```
-$ git log -S myFunction
-```
-</div>
 
-__أهـم (وليـس كل) الخيـارات التـي تسـاعدك عـلى تحديـد المخرجـات وفـق المعايـر التـي تريدهـا:__
+**مثال على إعداد الضغط:**
+```
+# قبل
+pick <commit_id>
+pick <commit_id2>
+pick <commit_id3>
 
-|الرمز | معناه|
-|:---:|:---:|
-| -n | عرض عدد محدد من المخرجات |
-| --since, --after | التعديلات بعد تاريخ معين |
-| --until, --before | التعديلات قبل تاريخ معين |
-| --author | جلب المخرجات التي تطابق المؤلف |
+# بعد (ضغط commit_id2 و commit_id3 في commit_id)
+pick <commit_id>
+squash <commit_id2>
+squash <commit_id3>
+```
 
-## مستودع الشفيرة
+---
 
-##### لإضافة Remote Repository:
+## ↩️ التراجع
 
-<div dir = ltr>
+### تجاهل التغييرات
 
+**تجاهل جميع التغييرات المحلية:**
+```bash
+git reset --hard HEAD
 ```
-$ git remote add [remote_name] [remote_URL]
-```
-</div>
-
-__مثال على ذلك:__
 
-<div dir = ltr>
-
-```
-$ git remote add calc https://github.com/algorithmers/calc
+**إلغاء تحضير جميع الملفات:**
+```bash
+git reset HEAD
 ```
-</div>
 
-##### لمعرفـة المسـتودعات التـي نتعامـل معهـا عن بعد:
-
-<div dir = ltr>
-
-```
-$ git remote -v
+**تجاهل التغييرات في ملف محدد:**
+```bash
+git checkout HEAD <file>
 ```
-</div>
 
-##### للحصـول عـلى قائمة بالأسماء المسـتعارة أو المـؤشرات التـي تشير لتلـك المسـتودعات بـدون التفاصيـل الأخـرى التـي ترافقهـا:
+### عمليات إعادة التعيين
 
-<div dir = ltr>
-
-```
-$ git remote 
+**إعادة التعيين إلى إيداع سابق (تجاهل جميع التغييرات):**
+```bash
+git reset --hard <commit>
 ```
-</div>
 
-##### لنسـخ مسـتودع شـيفرة وجلبـه إلى Working Directory:
-
-<div dir = ltr>
-
-```
-$ git clone [repository_URL]
+**إعادة التعيين إلى حالة الفرع البعيد:**
+```bash
+git reset --hard <remote/branch>
+# مثال: git reset --hard upstream/master
 ```
-</div>
 
-__مثال على ذلك:__
-
-<div dir = ltr>
-
+**إعادة التعيين مع الاحتفاظ بالتغييرات كغير محضّرة:**
+```bash
+git reset <commit>
 ```
-$ git clone https://github.com/algorithmers/my.git
-```
-</div>
-
-##### تحديـد اسـم خـاص بالمجلـد إذا لم تكـن تريـد الإسم الإفـتراضي:
-
-<div dir = ltr>
 
+**إعادة التعيين مع الاحتفاظ بالتغييرات المحلية غير المودعة:**
+```bash
+git reset --keep <commit>
 ```
-$ git clone [repository_URL] [new-name]
-```
-</div>
-
-__مثال على ذلك:__
 
-<div dir = ltr>
+### التراجع عن الإيداعات
 
+**التراجع عن إيداع (إنشاء إيداع جديد بتغييرات معاكسة):**
+```bash
+git revert <commit>
 ```
-$ git clone https://github.com/algorithmers/my.git proj
-```
-</div>
 
-##### لجلـب البيانـات الموجـودة في Remote Repository:
+### تنظيف الملفات المتجاهلة
 
-<div dir = ltr>
-
-```
-$ git fetch [remote-name]
+**حذف الملفات التي أُودعت بالخطأ والتي يجب تجاهلها:**
+```bash
+git rm -r --cached .
+git add .
+git commit -m "remove ignored files"
 ```
-</div>
 
-__مثال على ذلك:__
+---
 
-<div dir = ltr>
+## 🌊 Git Flow
 
-```
-$ git fetch origin
-```
-</div>
+**Git-flow المحسّن:** [git-flow-avh](https://github.com/petervanderdoes/gitflow-avh)
 
-##### رفـع البيانـات أو التعديـلات الجديـدة التـي قـام بهـا المطـور إلى مسـتودع الشـيفرة الموجـود عـلى السيرفر:
+### 📋 جدول المحتويات
+- [🔧 الإعداد](#-الإعداد-1)
+- [🚀 البدء](#-البدء)
+- [✨ الميزات](#-الميزات)
+- [🎁 إنشاء إصدار](#-إنشاء-إصدار)
+- [🔥 الإصلاحات العاجلة](#-الإصلاحات-العاجلة)
+- [📊 نظرة عامة على الأوامر](#-نظرة-عامة-على-الأوامر)
 
-<div dir = ltr>
-
-```
-$ git push [remote-name] [branch-name]
-```
-</div>
+---
 
-__مثال على ذلك:__
+### 🔧 الإعداد
 
-<div dir = ltr>
+> **متطلب أساسي:** يجب أن يكون Git مثبتاً ويعمل. Git-flow يعمل على macOS و Linux و Windows.
 
+**macOS (Homebrew):**
+```bash
+brew install git-flow-avh
 ```
-$ git push origin master
-```
-</div>
-
-##### لمعرفـة تفاصيـل أكثر حـول Remote Repository:
 
-<div dir = ltr>
+**macOS (MacPorts):**
+```bash
+port install git-flow
+```
 
+**Linux (توزيعات Debian):**
+```bash
+sudo apt-get install git-flow
 ```
-$ git remote show [remote-name]
+
+**Windows (Cygwin):**
+> يتطلب wget و util-linux
+```bash
+wget -q -O - --no-check-certificate https://raw.githubusercontent.com/petervanderdoes/gitflow/develop/contrib/gitflow-installer.sh install <state> | bash
 ```
-</div>
+
+---
 
-__مثال على ذلك:__
+### 🚀 البدء
 
-<div dir = ltr>
+يحتاج Git-flow إلى التهيئة لتخصيص إعدادات مشروعك.
 
+**التهيئة (تفاعلية):**
+```bash
+git flow init
 ```
-$ git remote show origin
+> ستجيب على أسئلة حول اتفاقيات تسمية الفروع. يُنصح باستخدام القيم الافتراضية.
+
+**التهيئة (استخدام الافتراضيات):**
+```bash
+git flow init -d
 ```
-</div>
 
-##### لإعادة تسمية الإسم المختـصر الـذي قمـت بإضافتـه لمسـتودع شـيفرة موجـود عـلى Server:
+---
 
-<div dir = ltr>
+### ✨ الميزات
 
-```
-$ git remote rename [old-remote-name] [new-remote-name]
+الميزات مخصصة لتطوير وظائف جديدة للإصدارات القادمة. عادةً ما توجد فقط في مستودعات المطورين.
+
+**بدء ميزة جديدة:**
+```bash
+git flow feature start MYFEATURE
 ```
-</div>
+> ينشئ فرع ميزة بناءً على 'develop' وينتقل إليه
 
-__مثال على ذلك:__
+**إنهاء ميزة:**
+```bash
+git flow feature finish MYFEATURE
+```
+> سيقوم بـ:
+> 1. دمج MYFEATURE في 'develop'
+> 2. حذف فرع الميزة
+> 3. العودة إلى 'develop'
 
-<div dir = ltr>
+**نشر ميزة (للتعاون):**
+```bash
+git flow feature publish MYFEATURE
+```
 
+**الحصول على ميزة منشورة:**
+```bash
+git flow feature pull origin MYFEATURE
 ```
-$ git remote rename dev devrepo
+
+**تتبع ميزة من المصدر:**
+```bash
+git flow feature track MYFEATURE
 ```
-</div>
 
-##### لحذف المستودع:
+---
 
-<div dir = ltr>
+### 🎁 إنشاء إصدار
 
-```
-$ git remote rm [remote-name]
-```
-</div>
+الإصدارات تدعم تحضير إصدارات الإنتاج الجديدة، وتسمح بإصلاحات الأخطاء الطفيفة وتحضير البيانات الوصفية.
 
-__مثال على ذلك:__
+**بدء إصدار:**
+```bash
+git flow release start RELEASE [BASE]
+```
+> ينشئ فرع إصدار من 'develop'. اختيارياً حدد [BASE] وهو SHA-1 للإيداع.
 
-<div dir = ltr>
+**نشر الإصدار:**
+```bash
+git flow release publish RELEASE
+```
 
+**تتبع إصدار بعيد:**
+```bash
+git flow release track RELEASE
 ```
-$ git remote rm devrepo
+
+**إنهاء الإصدار:**
+```bash
+git flow release finish RELEASE
 ```
-</div>
+> سيقوم بـ:
+> 1. دمج فرع الإصدار في 'master'
+> 2. وضع علامة على الإصدار
+> 3. إعادة دمج الإصدار في 'develop'
+> 4. حذف فرع الإصدار
 
-## للإختصارات والأسماء مسـتعارة
+> 💡 **لا تنسَ:** ادفع العلامات باستخدام `git push --tags`
 
-##### لوضـع أسماء مسـتعارة أو مختـصرة لأوامـر كاملـة أو إختصـار لجـزء معين  من الأمر:
+---
 
-<div dir = ltr>
+### 🔥 الإصلاحات العاجلة
 
-```
-$ git config --global alias.<الأمر الذي تود إختصاره> <الإختصار الذي تريده>
+الإصلاحات العاجلة تعالج المشاكل الحرجة في إصدارات الإنتاج الحية. تتفرع من العلامة المقابلة على master.
+
+**بدء إصلاح عاجل:**
+```bash
+git flow hotfix start VERSION [BASENAME]
 ```
-</div>
 
-__مثال على ذلك:__
+**إنهاء إصلاح عاجل:**
+```bash
+git flow hotfix finish VERSION
+```
+> يُدمج مرة أخرى في كل من 'develop' و 'master'، ويضع علامة على دمج master
 
-<div dir = ltr>
+---
 
-```
-$ git config --global alias.st status
-```
+### 📊 نظرة عامة على الأوامر
 
-</div>
+<p align="center">
+    <img alt="أوامر Git Flow" src="../Img/git-flow-commands.png" height="270" width="460">
+</p>
 
-## للتنظيف
+### 🌊 مخطط Git Flow
 
-##### لتنظيـف و إزالـة الملفـات أو المجلـدات الزائـدة أو التـي لا تحتـاج إليهـا:
+<p align="center">
+    <img alt="مخطط Git Flow" src="../Img/git-flow-commands-without-flow.png">
+</p>
 
-<div dir = ltr>
+---
 
-```
-$ git clean -f -d
-```
-</div>
 
-##### لتنظيـف و إزالـة الملفـات أو المجلـدات الزائـدة مع تزويدك بصـورة عـن مـا سـيتم حذفـه فعليـاً قبـل حذفـه بشـكل فعـلي:
+## 🌍 لغات أخرى
 
-<div dir = ltr>
+هذا الدليل المرجعي متوفر بعدة لغات:
 
-```
-$ git clean -n -d
-```
-</div>
+| اللغة | الرابط |
+|-------|--------|
+| 🇺🇸 الإنجليزية | [README.md](../README.md) |
+| 🇸🇦 العربية | **(الحالي)** |
+| 🇧🇩 البنغالية | [git-cheat-sheet-bn.md](git-cheat-sheet-bn.md) |
+| 🇧🇷 البرتغالية البرازيلية | [git-cheat-sheet-pt_BR.md](git-cheat-sheet-pt_BR.md) |
+| 🇨🇳 الصينية | [git-cheat-sheet-zh.md](git-cheat-sheet-zh.md) |
+| 🇩🇪 الألمانية | [git-cheat-sheet-de.md](git-cheat-sheet-de.md) |
+| 🇬🇷 اليونانية | [git-cheat-sheet-el.md](git-cheat-sheet-el.md) |
+| 🇮🇳 الهندية | [git-cheat-sheet-hi.md](git-cheat-sheet-hi.md) |
+| 🇰🇷 الكورية | [git-cheat-sheet-ko.md](git-cheat-sheet-ko.md) |
+| 🇵🇱 البولندية | [git-cheat-sheet-pl.md](git-cheat-sheet-pl.md) |
+| 🇪🇸 الإسبانية | [git-cheat-sheet-es.md](git-cheat-sheet-es.md) |
+| 🇹🇷 التركية | [git-cheat-sheet-tr.md](git-cheat-sheet-tr.md) |
 
-##### لحـذف الملفـات والمجلـدات الموجـودة أيضـاً في .gitigonre:
+---
 
-<div dir = ltr>
+## 🤝 المساهمة
 
-```
-$ git clean -f -d -x
-```
-</div>
+نرحب بالمساهمات! يمكنك:
 
-##### للتحقق مما سيتم حذفه قبل حذفه بشكل فعلي:
+- 🐛 الإبلاغ عن الأخطاء
+- ✨ إضافة أوامر Git جديدة
+- 🌍 الترجمة إلى لغات جديدة
+- 💡 تحسين الشروحات
+- 📝 تحسين التنسيق
 
-<div dir = ltr>
+**كيفية المساهمة:**
+1. انسخ (Fork) هذا المستودع
+2. أنشئ فرع الميزة (`git checkout -b feature/AmazingFeature`)
+3. أودع تغييراتك (`git commit -m 'Add some AmazingFeature'`)
+4. ادفع إلى الفرع (`git push origin feature/AmazingFeature`)
+5. افتح طلب سحب (Pull Request)
 
-```
-$ git clean -n -d -x
-```
-</div>
+---
 
-##### للتنظيف والحذف من خلال الأسلوب التفاعلي:
+## 📄 الترخيص
 
-<div dir = ltr>
+هذا المشروع مفتوح المصدر ومتاح تحت [رخصة MIT](../LICENSE).
 
-```
-$ git clean -x -i
-```
-</div>
+---
 
-</div>
+<p align="center">
+    <b>⭐ امنح هذا المستودع نجمة إذا وجدته مفيداً!</b>
+</p>

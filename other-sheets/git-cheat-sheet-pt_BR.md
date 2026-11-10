@@ -1,871 +1,867 @@
-Git cheat Sheet Brazilian Portuguese
-===============
+# Git Cheat Sheet Português (Brasil)
+[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
-### Índice
+<p align="center">
+    <img alt="Git" src="../Img/git-logo.png" height="190" width="455">
+</p>
 
-* [Configuração](#configuração)
-* [Arquivos de Configuração](#arquivos-de-configuração)
-* [Criar](#criar)
-* [Mudanças Locais](#mudanças-locais)
-* [Pesquisa](#pesquisa)
-* [Histórico de Commits](#histórico-de-commits)
-* [Ramos e Tags](#ramos-e-tags)
-* [Atualizar e Publicar](#atualizar-e-publicar)
-* [Mesclar e Reconstruir](#mesclar-e-reconstruir)
-* [Desfazer](#desfazer)
-* [Git Flow](#git-flow)
+---
 
-<hr>
+## 📖 Sobre
 
-## Configuração
+Esta folha de dicas abrangente do Git ajuda você a dominar comandos Git sem memorizar tudo. Seja você iniciante ou desenvolvedor experiente, este guia fornece referência rápida para operações essenciais do Git.
 
-##### Mostrar a configuração atual:
+**Contribuições são bem-vindas!** Sinta-se livre para:
+- Corrigir erros gramaticais
+- Adicionar novos comandos
+- Traduzir para seu idioma
+- Melhorar explicações
 
-```
-$ git config --list
-```
+---
 
-##### Mostrar a configuração do repositório:
+## 📋 Índice
 
-```
-$ git config --local --list
-```
+- [🔧 Configuração](#-configuração)
+- [⚙️ Arquivos de Configuração](#️-arquivos-de-configuração)
+- [🆕 Criar Repositório](#-criar-repositório)
+- [📝 Mudanças Locais](#-mudanças-locais)
+- [🔍 Buscar](#-buscar)
+- [📖 Histórico de Commits](#-histórico-de-commits)
+- [📁 Mover / Renomear](#-mover--renomear)
+- [🌿 Branches e Tags](#-branches-e-tags)
+- [🔄 Atualizar e Publicar](#-atualizar-e-publicar)
+- [🔀 Merge e Rebase](#-merge-e-rebase)
+- [↩️ Desfazer](#️-desfazer)
+- [🌊 Git Flow](#-git-flow)
+- [🌍 Outros Idiomas](#-outros-idiomas)
 
-##### Mostrar a configuração global:
+---
 
-```
-$ git config --global --list
-```
+## 🔧 Configuração
 
+### Ver Configuração
 
-##### Mostrar a configuração do sistema:
-
-```
-$ git config --system --list
-```
-
-##### Definir um nome que seja identificável para crédito ao revisar o histórico de versão:
-
-```
-$ git config --global user.name “[nome sobrenome]”
+**Mostrar configuração atual:**
+```bash
+git config --list
 ```
 
-##### Definir um endereço de e-mail que será associado a cada marcador de histórico:
-
-```
-$ git config --global user.email “[email-válido]”
-```
-
-##### Definir a coloração automática da linha de comandos do Git para facilitar a revisão:
-
-```
-$ git config --global color.ui auto
+**Mostrar configuração do repositório:**
+```bash
+git config --local --list
 ```
 
-##### Definir o editor global para *commits*
-
-```
-$ git config --global core.editor vi
-```
-
-<hr>
-
-## Arquivos de Configuração
-
-##### Arquivo de configuração específico do repositório [--local]:
-
-```
-<repo>/.git/config
+**Mostrar configuração global:**
+```bash
+git config --global --list
 ```
 
-##### Arquivo de configuração específico do usuário [--global]:
-
-```
-~/.gitconfig
-```
-
-##### Arquivo de configuração de todo o sistema [--system]:
-
-```
-/etc/gitconfig
+**Mostrar configuração do sistema:**
+```bash
+git config --system --list
 ```
 
-<hr>
+### Configuração do Usuário
 
-## Criar
-
-##### Clonar um repositório existente:
-
-Existem duas maneiras:
-
-Via SSH
-
-```
-$ git clone ssh://usuario@dominio.com/repo.git
+**Definir seu nome para histórico de versões:**
+```bash
+git config --global user.name "[nome sobrenome]"
 ```
 
-Via HTTP
-
-```
-$ git clone http://dominio.com/usuario/repo.git
-```
-
-##### Criar um novo repositório local no diretório atual:
-
-```
-$ git init
+**Definir seu endereço de email:**
+```bash
+git config --global user.email "[email-válido]"
 ```
 
-##### Criar um novo repositório local em um diretório específico:
+### Configurações de Exibição e Editor
 
-```
-$ git init <diretorio>
-```
-
-<hr>
-
-## Mudanças Locais
-
-##### Mudanças no diretório de trabalho:
-
-```
-$ git status
+**Habilitar coloração automática da linha de comando:**
+```bash
+git config --global color.ui auto
 ```
 
-##### Mudanças nos arquivos monitorados:
-
-```
-$ git diff
-```
-
-##### Ver as mudanças/diferenças de um arquivo específico:
-
-```
-$ git diff <arquivo>
+**Definir editor global para commits:**
+```bash
+git config --global core.editor vi
 ```
 
-##### Adicionar todas as mudanças atuais ao próximo *commit*:
+---
 
-```
-$ git add .
-```
+## ⚙️ Arquivos de Configuração
 
-##### Adicionar algumas mudanças no &lt;arquivo&gt; para o próximo *commit*:
+| Escopo | Localização | Flag do Comando |
+|--------|-------------|-----------------|
+| **Repositório** | `<repo>/.git/config` | `--local` |
+| **Usuário** | `~/.gitconfig` | `--global` |
+| **Sistema** | `/etc/gitconfig` | `--system` |
 
-```
-$ git add -p <arquivo>
-```
+---
 
-##### Adicionar apenas os arquivos mencionados ao próximo *commit*:
+## 🆕 Criar Repositório
 
-```
-$ git add <nome-do-arquivo-1> <nome-do-arquivo-2>
-```
+### Clonar Repositório Existente
 
-##### Realizar um *commit* de todas as mudanças locais nos arquivos monitorados:
-
-```
-$ git commit -a
+**Via SSH:**
+```bash
+git clone ssh://usuario@dominio.com/repo.git
 ```
 
-##### Realizar um *commit* das mudanças anteriormente preparadas (*staged*):
-
-```
-$ git commit
-```
-
-##### Realizar um *commit* com mensagem:
-
-```
-$ git commit -m 'mensagem aqui'
+**Via HTTPS:**
+```bash
+git clone https://dominio.com/usuario/repo.git
 ```
 
-##### Realizar um *commit* pulando a área de preparação (*staging area*) e adicionando uma mensagem:
+### Inicializar Novo Repositório
 
-```
-$ git commit -am 'mensagem aqui'
-```
-
-##### Realizar um *commit* com alguma data anterior:
-
-```
-$ git commit --date="`date --date='n day ago'`" -am "<Mensagem do commit aqui>"
+**Criar repositório no diretório atual:**
+```bash
+git init
 ```
 
-##### Emendar o último *commit*:<br>
-<em><sub>Não emenda os *commits* publicados!</sub></em>
-
-```
-$ git commit -a --amend
+**Criar repositório em diretório específico:**
+```bash
+git init <diretorio>
 ```
 
-##### Emendar com o último *commit*, mas usar a mensagem de log do *commit* anterior:
-<em><sub>Não emenda os *commits* publicados!</sub></em>
+---
 
-```shell
-$ git commit --amend --no-edit
+## 📝 Mudanças Locais
+
+### Verificar Status e Diferenças
+
+**Ver status do diretório de trabalho:**
+```bash
+git status
 ```
 
-##### Alterar data do *commit* do último *commit*:
-
+**Mostrar mudanças em arquivos rastreados:**
+```bash
+git diff
 ```
+
+**Mostrar mudanças em arquivo específico:**
+```bash
+git diff <arquivo>
+```
+
+### Preparar Mudanças
+
+**Adicionar todas as mudanças atuais:**
+```bash
+git add .
+```
+
+**Adicionar arquivos específicos:**
+```bash
+git add <arquivo1> <arquivo2>
+```
+
+**Adicionar interativamente partes de um arquivo:**
+```bash
+git add -p <arquivo>
+```
+
+### Fazer Commit das Mudanças
+
+**Fazer commit de todas as mudanças de arquivos rastreados:**
+```bash
+git commit -a
+```
+
+**Fazer commit das mudanças preparadas:**
+```bash
+git commit
+```
+
+**Fazer commit com mensagem:**
+```bash
+git commit -m 'mensagem aqui'
+```
+
+**Pular preparação e fazer commit com mensagem:**
+```bash
+git commit -am 'mensagem aqui'
+```
+
+**Fazer commit com data específica:**
+```bash
+git commit --date="`date --date='n day ago'`" -am "<Mensagem do Commit Aqui>"
+```
+
+### Modificar Último Commit
+
+> ⚠️ **Aviso:** Não modifique commits publicados!
+
+**Emendar último commit:**
+```bash
+git commit -a --amend
+```
+
+**Emendar sem alterar mensagem do commit:**
+```bash
+git commit --amend --no-edit
+```
+
+**Alterar data do committer:**
+```bash
 GIT_COMMITTER_DATE="data" git commit --amend
 ```
 
-##### Alterar data do Autor do último *commit*:
-
-```shell
-$ git commit --amend --date="data"
-```
-
-##### Mover as alterações não confirmadas (*uncommitted changes*) do ramo atual para algum outro ramo:<br>
-
-```
-$ git stash
-$ git checkout ramo2
-$ git stash pop
-```
-
-##### Restaurar as alterações acumuladas (*stashed changes*) de volta para o ramo atual:
-
-```shell
-$ git stash apply
-```
-
-##### Restaurar um *stash* particular de volta para o ramo atual:
-
-- O *{numero-do-stash}* pode ser obtido de `git stash list`
-
-```shell
-$ git stash apply stash@{numero-do-stash}
-```
-
-##### Remover o último conjunto de alterações acumuladas:
-
-```
-$ git stash drop
-```
-
-<hr>
-
-## Pesquisa
-
-##### Uma pesquisa de texto em todos os arquivos do diretório:
-
-```
-$ git grep "Olá"
-```
-
-##### Um texto em qualquer versão:
-
-```
-$ git grep "Olá" v2.5
-```
-
-##### Mostrar *commits* que introduziram uma palavra-chave específica:
-
-```
-$ git log -S'palavra-chave'
-```
-
-##### Mostrar *commits* que introduziram uma palavra-chave específica (usando uma expressão regular):
-
-```
-$ git log -S'palavra-chave' --pickaxe-regex
-```
-
-<hr>
-
-## Histórico de Commits
-
-##### Mostrar todos os *commits*, começando pelo mais novo (mostrará o hash, informações do autor, data do *commit* e título do *commit*):
-
-```
-$ git log
-```
-
-##### Mostrar todos os *commits* (mostrará apenas o hash do *commit* e a mensagem do *commit*)
-
-```
-$ git log --oneline
-```
-
-##### Mostrar todos os *commits* de um usuário específico:
-
-```
-$ git log --author="nome-do-usuario"
-```
-
-##### Mostrar alterações ao longo do tempo para um arquivo específico:
-
-```
-$ git log -p <arquivo>
-```
-
-##### Exibir *commits* que estão presentes apenas no remoto/ramo no lado direito
-
-```
-$ git log --oneline <origin/master>..<remoto/master> --left-right
-```
-
-##### Quem mudou, o quê e quando no &lt;arquivo&gt;:
-
-```
-$ git blame <arquivo>
-```
-
-##### Mostrar log de referência:
-
-```
-$ git reflog show
-```
-
-##### Deletar log de referência:
-
-```
-$ git reflog delete
-```
-
-<hr>
-
-## Mover / Renomear
-
-##### Renomear um arquivo:
-
-Renomear Index.txt para Index.html
-
-```
-$ git mv Index.txt Index.html
-```
-
-<hr>
-
-## Ramos e Tags
-
-##### Listar todos os ramos locais:
-
-```
-$ git branch
-```
-
-##### Listar ramos locais/remotos:
-
-```
-$ git branch -a
-```
-
-##### Liste todos os ramos remotos:
-
-```
-$ git branch -r
-```
-
-##### Mudar ramo `HEAD`:
-
-```
-$ git checkout <ramo>
-```
-
-##### Atualizar um único arquivo de outro ramo:
-
-```
-$ git checkout <ramo> -- <arquivo>
-```
-
-##### Criar e mudar para um novo ramo:
-
-```
-$ git checkout -b <ramo>
-```
-
-
-##### Criar um novo ramo a partir de um ramo existente e mudar para o novo ramo:
-
-```
-$ git checkout -b <ramo_novo> <ramo_existente>
-```
-
-
-##### Criar um novo ramo a partir de um *commit* existente e mudar para o novo ramo:
-
-```
-$ git checkout <hash-do-commit> -b <novo_nome_do_ramo>
-```
-
-
-##### Criar um novo ramo com base em seu `HEAD` atual:
-
-```
-$ git branch <novo-ramo>
-```
-
-##### Criar um novo ramo de monitoramento com base em um ramo remoto:
-
-```
-$ git branch --track <ramo-novo> <ramo-remoto>
-```
-
-##### Deletar um ramo local:
-
-```
-$ git branch -d <ramo>
-```
-
-##### Renomear o ramo atual para um novo nome de ramo
-
-```shell
-$ git branch -m <nome_do_novo_ramo>
-```
-
-##### Forçar a exclusão de um ramo local:
-<em><sub>Você perderá as alterações não mescladas!</sub></em>
-
-```
-$ git branch -D <ramo>
-```
-
-##### Marcar `HEAD` com uma *tag*:
-
-```
-$ git tag <nome-da-tag>
-```
-
-##### Marcar `HEAD` com uma *tag* e abrir o editor para incluir uma mensagem:
-
-```
-$ git tag -a <nome-da-tag>
-```
-
-##### Marcar `HEAD` com uma *tag* que inclui uma mensagem:
-
-```
-$ git tag <nome-da-tag> -am 'mensagem aqui'
-```
-
-##### Listar todas as *tags*:
-
-```
-$ git tag
-```
-
-##### Listar todas as *tags* com suas mensagens (mensagem de *tag* ou mensagem de *commit* se a *tag* não tiver mensagem):
-
-```
-$ git tag -n
-```
-
-<hr>
-
-## Atualizar e Publicar
-
-##### Listar todos os remotos configurados atualmente:
-
-```
-$ git remote -v
-```
-
-##### Mostrar informações sobre um remoto:
-
-```
-$ git remote show <remoto>
-```
-
-##### Adicionar um novo repositório removo chamado &lt;remoto&gt;:
-
-```
-$ git remote add <remoto> <url>
-```
-
-##### Renomear um repositório remoto de &lt;remoto&gt; para &lt;novo_remoto&gt;:
-
-```
-$ git remote rename <remoto> <novo_remoto>
-```
-
-##### Remover um remoto:
-
-```
-$ git remote rm <remoto>
-```
-
-<em><sub>Nota: `git remote rm` não exclui o repositório remoto do servidor. Ele simplesmente remove o remoto e suas referências de seu repositório local.</sub></em>
-
-##### Baixar todas as alterações de &lt;remoto&gt;, mas não integrar no `HEAD`:
-
-```
-$ git fetch <remoto>
-```
-
-##### Baixar as alterações e mesclar/integrar diretamente no `HEAD`:
-
-```
-$ git remote pull <remoto> <url>
-```
-
-##### Obter todas as alterações do `HEAD` para o repositório local:
-
-```
-$ git pull origin master
-```
-
-##### Obter todas as alterações do `HEAD` para o repositório local sem mesclagem:
-
-```
-$ git pull --rebase <remoto> <ramo>
-```
-
-##### Publicar as alterações locais remotamente:
-
-```
-$ git push remote <remoto> <ramo>
-```
-
-##### Excluir um ramo no remoto:
-
-```
-$ git push <remoto> :<ramo> (desde o Git v1.5.0)
-```
-
-OU
-
-```
-$ git push <remoto> --delete <ramo> (desde o Git v1.7.0)
-```
-
-##### Publicar suas *tags*:
-
-```
-$ git push --tags
-```
-
-##### Configurar a ferramenta de mesclagem globalmente para o meld (editor)
-
+**Alterar data do autor:**
 ```bash
-$ git config --global merge.tool meld
+git commit --amend --date="data"
 ```
 
-##### Usar sua ferramenta de mesclagem configurada para resolver conflitos:
+### Guardar Mudanças Temporariamente
 
-```
-$ git mergetool
-```
-
-<hr>
-
-## Mesclar e Reconstruir
-
-##### Mesclar ramo em seu `HEAD` atual:
-
-```
-$ git merge <ramo>
+**Salvar mudanças atuais temporariamente:**
+```bash
+git stash
 ```
 
-##### Reconstruir (rebase) seu `HEAD` atual no &lt;ramo&gt;:<br>
-<em><sub>Não faz reconstrução de *commit* publicado!</sub></em>
-
-```
-$ git rebase <ramo>
+**Aplicar últimas mudanças salvas:**
+```bash
+git stash apply
 ```
 
-##### Abortar uma reconstrução:
-
+**Aplicar stash específico:**
+```bash
+git stash apply stash@{numero_stash}
 ```
-$ git rebase --abort
-```
+> Use `git stash list` para ver stashes disponíveis
 
-##### Continuar uma reconstrução após resolver os conflitos:
-
-```
-$ git rebase --continue
-```
-
-##### Usar seu editor para resolver manualmente os conflitos e (depois de resolver) marcar o arquivo como resolvido:
-
-```
-$ git add <arquivo-resolvido>
+**Remover último stash:**
+```bash
+git stash drop
 ```
 
-```
-$ git rm <arquivo-resolvido>
-```
-
-##### Juntando *commits* (*squashing commits*):
-
-```
-$ git rebase -i <commit-just-before-first>
+**Mover mudanças não commitadas para outro branch:**
+```bash
+git stash
+git checkout branch2
+git stash pop
 ```
 
-Agora substitua isso:
+---
 
+## 🔍 Buscar
+
+### Busca de Texto
+
+**Buscar texto em todos os arquivos:**
+```bash
+git grep "Olá"
 ```
+
+**Buscar em versão específica:**
+```bash
+git grep "Olá" v2.5
+```
+
+### Busca de Commits
+
+**Encontrar commits que introduziram palavra-chave específica:**
+```bash
+git log -S 'palavra-chave'
+```
+
+**Buscar com expressão regular:**
+```bash
+git log -S 'palavra-chave' --pickaxe-regex
+```
+
+---
+
+## 📖 Histórico de Commits
+
+### Histórico Básico
+
+**Mostrar todos os commits (detalhado):**
+```bash
+git log
+```
+
+**Mostrar commits (uma linha cada):**
+```bash
+git log --oneline
+```
+
+**Mostrar commits por autor específico:**
+```bash
+git log --author="nomeusuario"
+```
+
+**Mostrar mudanças para arquivo específico:**
+```bash
+git log -p <arquivo>
+```
+
+### Histórico Avançado
+
+**Comparar branches:**
+```bash
+git log --oneline <origin/master>..<remote/master> --left-right
+```
+
+**Mostrar quem mudou o que e quando:**
+```bash
+git blame <arquivo>
+```
+
+### Logs de Referência
+
+**Mostrar log de referência:**
+```bash
+git reflog show
+```
+
+**Deletar log de referência:**
+```bash
+git reflog delete
+```
+
+---
+
+## 📁 Mover / Renomear
+
+**Renomear um arquivo:**
+```bash
+git mv Index.txt Index.html
+```
+
+---
+
+## 🌿 Branches e Tags
+
+### Listar Branches
+
+**Listar branches locais:**
+```bash
+git branch
+```
+
+**Listar todos os branches (local + remoto):**
+```bash
+git branch -a
+```
+
+**Listar branches remotos:**
+```bash
+git branch -r
+```
+
+**Listar branches mesclados:**
+```bash
+git branch --merged
+```
+
+### Trocar e Criar Branches
+
+**Trocar para branch existente:**
+```bash
+git checkout <branch>
+```
+
+**Criar e trocar para novo branch:**
+```bash
+git checkout -b <branch>
+```
+
+**Trocar para branch anterior:**
+```bash
+git checkout -
+```
+
+**Criar branch a partir de branch existente:**
+```bash
+git checkout -b <novo_branch> <branch_existente>
+```
+
+**Criar branch a partir de commit específico:**
+```bash
+git checkout <hash-commit> -b <nome_novo_branch>
+```
+
+**Criar branch sem trocar:**
+```bash
+git branch <novo-branch>
+```
+
+**Criar branch de rastreamento:**
+```bash
+git branch --track <novo-branch> <branch-remoto>
+```
+
+### Operações de Branch
+
+**Obter arquivo único de branch diferente:**
+```bash
+git checkout <branch> -- <nomearquivo>
+```
+
+**Aplicar commit específico de outro branch:**
+```bash
+git cherry-pick <hash commit>
+```
+
+**Renomear branch atual:**
+```bash
+git branch -m <nome_novo_branch>
+```
+
+**Deletar branch local:**
+```bash
+git branch -d <branch>
+```
+
+**Forçar deleção de branch local:**
+```bash
+git branch -D <branch>
+```
+> ⚠️ **Aviso:** Você perderá mudanças não mescladas!
+
+### Tags
+
+**Criar tag no HEAD:**
+```bash
+git tag <nome-tag>
+```
+
+**Criar tag anotada:**
+```bash
+git tag -a <nome-tag>
+```
+
+**Criar tag com mensagem:**
+```bash
+git tag <nome-tag> -am 'mensagem aqui'
+```
+
+**Listar todas as tags:**
+```bash
+git tag
+```
+
+**Listar tags com mensagens:**
+```bash
+git tag -n
+```
+
+---
+
+## 🔄 Atualizar e Publicar
+
+### Gerenciamento de Remotos
+
+**Listar remotos configurados:**
+```bash
+git remote -v
+```
+
+**Mostrar informações do remoto:**
+```bash
+git remote show <remoto>
+```
+
+**Adicionar novo remoto:**
+```bash
+git remote add <remoto> <url>
+```
+
+**Renomear remoto:**
+```bash
+git remote rename <remoto> <novo_remoto>
+```
+
+**Remover remoto:**
+```bash
+git remote rm <remoto>
+```
+> ℹ️ **Nota:** Isso apenas remove a referência remota localmente, não o repositório remoto em si.
+
+### Fetch e Pull
+
+**Baixar mudanças sem mesclar:**
+```bash
+git fetch <remoto>
+```
+
+**Baixar e mesclar mudanças:**
+```bash
+git pull <remoto> <branch>
+```
+
+**Obter mudanças do branch principal:**
+```bash
+git pull origin master
+```
+
+**Pull com rebase:**
+```bash
+git pull --rebase <remoto> <branch>
+```
+
+### Push e Publicar
+
+**Publicar mudanças locais:**
+```bash
+git push <remoto> <branch>
+```
+
+**Deletar branch remoto:**
+```bash
+# Git v1.7.0+
+git push <remoto> --delete <branch>
+
+# Git v1.5.0+
+git push <remoto> :<branch>
+```
+
+**Publicar tags:**
+```bash
+git push --tags
+```
+
+---
+
+## 🔀 Merge e Rebase
+
+### Operações de Merge
+
+**Mesclar branch no HEAD atual:**
+```bash
+git merge <branch>
+```
+
+**Configurar ferramenta de merge globalmente:**
+```bash
+git config --global merge.tool meld
+```
+
+**Usar ferramenta de merge configurada:**
+```bash
+git mergetool
+```
+
+### Operações de Rebase
+
+> ⚠️ **Aviso:** Não faça rebase de commits publicados!
+
+**Fazer rebase do HEAD atual sobre branch:**
+```bash
+git rebase <branch>
+```
+
+**Abortar rebase:**
+```bash
+git rebase --abort
+```
+
+**Continuar rebase após resolver conflitos:**
+```bash
+git rebase --continue
+```
+
+### Resolução de Conflitos
+
+**Marcar arquivo como resolvido:**
+```bash
+git add <arquivo-resolvido>
+```
+
+**Remover arquivo resolvido:**
+```bash
+git rm <arquivo-resolvido>
+```
+
+### Squashing Commits
+
+**Rebase interativo para squashing:**
+```bash
+git rebase -i <commit-logo-antes-do-primeiro>
+```
+
+**Exemplo de configuração para squash:**
+```
+# Antes
 pick <commit_id>
 pick <commit_id2>
 pick <commit_id3>
-```
 
-para isso:
-
-```
+# Depois (squash commit_id2 e commit_id3 em commit_id)
 pick <commit_id>
 squash <commit_id2>
 squash <commit_id3>
 ```
 
-<hr>
+---
 
-## Desfazer
+## ↩️ Desfazer
 
-##### Descartar todas as mudanças locais em seu diretório de trabalho:
+### Descartar Mudanças
 
-```
-$ git reset --hard HEAD
-```
-
-##### Tirar todos os arquivos da área de preparação (ou seja, desfazer o último `git add`):
-
-```
-$ git reset HEAD
-```
-
-##### Descartar as alterações locais em um arquivo específico:
-
-```
-$ git checkout HEAD <arquivo>
-```
-
-##### Reverter um *commit* (produzindo um novo *commit* com alterações contrárias):
-
-```
-$ git revert <commit>
-```
-
-##### Redefinir o ponteiro `HEAD` para um *commit* anterior e descartar todas as alterações desde então:
-
-```
-$ git reset --hard <commit>
-```
-
-##### Redefinir o ponteiro `HEAD` para um estado atual de um ramo remoto:
-
-```
-$ git reset --hard <remoto/ramo> e.g., upstream/master, origin/minha-recurso
-```
-
-##### Redefinir o ponteiro `HEAD` para um *commit* anterior e preservar todas as alterações como alterações não preparadas (*unstaged changes*):
-
-```
-$ git reset <commit>
-```
-
-##### Redefinir o ponteiro `HEAD` para um *commit* anterior e preservar as alterações locais não confirmadas (*committed*):
-
-```
-$ git reset --keep <commit>
-```
-
-##### Remover arquivos que foram acidentalmente confirmados antes de serem adicionados a .gitignore:
-
-```
-$ git rm -r --cached .
-$ git add .
-$ git commit -m "remove arquivo xyz"
-```
-
-<hr>
-
-## Git-Flow
-Improved [Git-flow](https://github.com/petervanderdoes/gitflow-avh)
-
-### Índice
-
-* [Configuração](#configuração)
-* [Começar](#começar)
-* [Recursos](#features)
-* [Fazer um Lançamento](#fazer-um-lançamento)
-* [Correções Rápidas](#correções-rápidas)
-* [Comandos](#comandos)
-
-<hr>
-
-### Configuração
-
-###### Você precisa de uma instalação git funcional como pré-requisito. O Git flow funciona em OSX, Linux e Windows.
-
-##### OSX Homebrew:
-
-```
-$ brew install git-flow-avh
-```
-
-##### OSX Macports:
-
-```
-$ port install git-flow
-```
-
-##### Linux (baseado em Debian):
-
-```
-$ sudo apt-get install git-flow
-```
-
-##### Windows (Cygwin):
-
-###### Você precisa do wget e do util-linux para instalar o git-flow.
-
+**Descartar todas as mudanças locais:**
 ```bash
-$ wget -q -O - --no-check-certificate https://raw.githubusercontent.com/petervanderdoes/gitflow/develop/contrib/gitflow-installer.sh install <state> | bash
+git reset --hard HEAD
 ```
 
-<hr>
+**Tirar todos os arquivos da área de staging:**
+```bash
+git reset HEAD
+```
 
-### Começar
+**Descartar mudanças em arquivo específico:**
+```bash
+git checkout HEAD <arquivo>
+```
 
-###### O Git flow precisa ser inicializado para personalizar a configuração do projeto. Comece a usar o git-flow inicializando-o dentro de um repositório git existente:
+### Operações de Reset
 
-##### Inicializar:
+**Reset para commit anterior (descartar todas as mudanças):**
+```bash
+git reset --hard <commit>
+```
 
-###### Você terá que responder a algumas perguntas sobre as convenções de nomenclatura de seus ramos. É recomendável usar os valores padrão.
+**Reset para estado do branch remoto:**
+```bash
+git reset --hard <remoto/branch>
+# Exemplo: git reset --hard upstream/master
+```
 
-```shell
+**Reset preservando mudanças como não preparadas:**
+```bash
+git reset <commit>
+```
+
+**Reset preservando mudanças locais não commitadas:**
+```bash
+git reset --keep <commit>
+```
+
+### Reverter Commits
+
+**Reverter commit (criar novo commit com mudanças opostas):**
+```bash
+git revert <commit>
+```
+
+### Limpar Arquivos Ignorados
+
+**Remover arquivos acidentalmente commitados que deveriam ser ignorados:**
+```bash
+git rm -r --cached .
+git add .
+git commit -m "remover arquivos ignorados"
+```
+
+---
+
+## 🌊 Git Flow
+
+**Git-flow melhorado:** [git-flow-avh](https://github.com/petervanderdoes/gitflow-avh)
+
+### 📋 Índice
+- [🔧 Configuração](#-configuração-1)
+- [🚀 Começando](#-começando)
+- [✨ Features](#-features)
+- [🎁 Fazer um Release](#-fazer-um-release)
+- [🔥 Hotfixes](#-hotfixes)
+- [📊 Resumo de Comandos](#-resumo-de-comandos)
+
+---
+
+### 🔧 Configuração
+
+> **Pré-requisito:** Instalação do Git funcionando é necessária. Git-flow funciona no macOS, Linux e Windows.
+
+**macOS (Homebrew):**
+```bash
+brew install git-flow-avh
+```
+
+**macOS (MacPorts):**
+```bash
+port install git-flow
+```
+
+**Linux (baseado em Debian):**
+```bash
+sudo apt-get install git-flow
+```
+
+**Windows (Cygwin):**
+> Requer wget e util-linux
+```bash
+wget -q -O - --no-check-certificate https://raw.githubusercontent.com/petervanderdoes/gitflow/develop/contrib/gitflow-installer.sh install <state> | bash
+```
+
+---
+
+### 🚀 Começando
+
+Git-flow precisa de inicialização para personalizar a configuração do seu projeto.
+
+**Inicializar (interativo):**
+```bash
 git flow init
 ```
+> Você responderá perguntas sobre convenções de nomenclatura de branches. Valores padrão são recomendados.
 
-OU
-
-###### Para usar o padrão
-
-```shell
+**Inicializar (usar padrões):**
+```bash
 git flow init -d
 ```
 
-<hr>
+---
 
-### Recursos
+### ✨ Features
 
-###### Desenvolver novos recursos para os próximos lançamentos. Normalmente existe apenas em repositórios de desenvolvedores.
+Features são para desenvolver nova funcionalidade para próximos releases. Tipicamente existem apenas em repositórios de desenvolvedores.
 
-##### Começar um novo recurso:
-
-###### Esta ação cria um novo ramo de recurso baseado em 'desenvolver' e muda para ele.
-
+**Iniciar novo feature:**
+```bash
+git flow feature start MEUFEATURE
 ```
-git flow feature start MEURECURSO
+> Cria branch de feature baseado em 'develop' e troca para ele
+
+**Finalizar feature:**
+```bash
+git flow feature finish MEUFEATURE
 ```
+> Isso fará:
+> 1. Mesclar MEUFEATURE em 'develop'
+> 2. Remover o branch de feature
+> 3. Trocar de volta para 'develop'
 
-##### Concluir um recurso:
-
-###### Concluir o desenvolvimento de um recurso. Esta ação realiza o seguinte:
-
-###### 1) Mescla MEURECURSO para 'desenvolver'.
-
-###### 2) Remove o ramo do recurso.
-
-###### 3) Volta para o ramo 'desenvolver'
-
-```
-git flow feature finish MEURECURSO
+**Publicar feature (para colaboração):**
+```bash
+git flow feature publish MEUFEATURE
 ```
 
-##### Publicar um recurso:
-
-###### Você está desenvolvendo um recurso em colaboração? Publique um recurso no servidor remoto para que possa ser usado por outros usuários.
-
-```
-git flow feature publish MEURECURSO
+**Obter feature publicado:**
+```bash
+git flow feature pull origin MEUFEATURE
 ```
 
-##### Obter um recurso publicado:
-
-###### Obter um recurso publicado por outro usuário.
-
-```
-git flow feature pull origin MEURECURSO
+**Rastrear feature de origem:**
+```bash
+git flow feature track MEUFEATURE
 ```
 
-##### Monitorar um recurso de origin:
+---
 
-###### Você pode monitorar um recurso em origin usando
+### 🎁 Fazer um Release
 
+Releases suportam preparação de novos releases de produção, permitindo correções menores de bugs e preparando meta-dados.
+
+**Iniciar release:**
+```bash
+git flow release start RELEASE [BASE]
 ```
-git flow feature track MEURECURSO
-```
+> Cria branch de release a partir de 'develop'. Opcionalmente especifique commit SHA-1 [BASE].
 
-<hr>
-
-### Fazer um Lançamento
-
-###### Apoio na preparação de um novo lançamento de produção. Permitir pequenas correções de bugs e preparar metadados para um lançamento
-
-##### Começar um lançamento:
-
-###### Para iniciar uma versão, use o comando `git flow release`. Ele cria um ramo de lançamento criado a partir do ramo 'desenvolver'. Opcionalmente, você pode fornecer um hash sha-1 de *commit* [BASE] para iniciar o lançamento. O *commit* deve estar no ramo 'desenvolver'.
-
-```
-git flow release start LANÇAMENTO [BASE]
+**Publicar release:**
+```bash
+git flow release publish RELEASE
 ```
 
-###### É aconselhável publicar o ramo de lançamento depois de criá-lo para permitir *commits* de lançamento por outros desenvolvedores. Faça de forma semelhante à publicação de recursos com o comando:
-
-```
-git flow release publish LANÇAMENTO
-```
-
-###### (Você pode monitorar uma versão remota com o comando: `git flow release track LANÇAMENTO`)
-
-##### Concluir um lançamento:
-
-###### Concluir um lançamento é um dos grandes passos na ramificação git. Ele executa várias ações:
-
-###### 1) Mescla o ramo de lançamento de volta em 'master'
-
-###### 2) Marca o lançamento com seu nome
-
-###### 3) Mescla de volta o lançamento em 'desenvolver'
-
-###### 4) Remove o ramo de lançamento
-
-```
-git flow release finish LANÇAMENTO
+**Rastrear release remoto:**
+```bash
+git flow release track RELEASE
 ```
 
-###### Não se esqueça de enviar suas *tags* com ```git push --tags```
-
-<hr>
-
-### Correções rápidas
-
-###### As correções rápidas (*hotfixes*) surgem da necessidade de agir imediatamente em um estado indesejado de uma versão de produção ao vivo. Pode ser ramificado a partir da *tag* correspondente no ramo *master* que marca a versão de produção.
-
-##### Início da correção rápida do Git flow:
-
-###### Como os outros comandos do git flow, uma correção rápida é iniciada com
-
+**Finalizar release:**
+```bash
+git flow release finish RELEASE
 ```
-$ git flow hotfix start VERSÃO [NOMEDABASE]
-```
+> Isso fará:
+> 1. Mesclar branch de release em 'master'
+> 2. Taggar o release
+> 3. Mesclar release de volta em 'develop'
+> 4. Remover branch de release
 
-###### O argumento da versão marca o novo nome de lançamento da correção rápida. Opcionalmente, você pode especificar um nome de base para começar.
+> 💡 **Não esqueça:** Envie suas tags com `git push --tags`
 
-##### Concluir uma correção rápida:
+---
 
-###### Ao terminar uma correção rápida, ele é mesclado de volta ao desenvolver e ao *master*. Além disso, a mesclagem do *master* é marcada com a versão da correção rápida
+### 🔥 Hotfixes
 
-```
-git flow hotfix finish VERSÃO
+Hotfixes abordam problemas críticos em versões de produção ao vivo. Eles se ramificam da tag correspondente no master.
+
+**Iniciar hotfix:**
+```bash
+git flow hotfix start VERSAO [NOMEBASE]
 ```
 
-<hr>
+**Finalizar hotfix:**
+```bash
+git flow hotfix finish VERSAO
+```
+> Mescla de volta em 'develop' e 'master', e tagga o merge do master
 
-### Comandos
-<p align="center">
-    <img alt="Git" src="../Img/git-flow-commands.png" height="270" width="460">
-</p>
-<hr>
+---
 
-### Esquema git flow
+### 📊 Resumo de Comandos
 
 <p align="center">
-    <img alt="Git" src="../Img/git-flow-commands-without-flow.png">
+    <img alt="Comandos Git Flow" src="../Img/git-flow-commands.png" height="270" width="460">
 </p>
-<hr>
+
+### 🌊 Esquema do Git Flow
+
+<p align="center">
+    <img alt="Esquema Git Flow" src="../Img/git-flow-commands-without-flow.png">
+</p>
+
+---
+
+
+## 🌍 Outros Idiomas
+
+Esta folha de dicas está disponível em múltiplos idiomas:
+
+| Idioma | Link |
+|--------|------|
+| 🇺🇸 Inglês | [README.md](../README.md) |
+| 🇸🇦 Árabe | [git-cheat-sheet-ar.md](./git-cheat-sheet-ar.md) |
+| 🇧🇩 Bengali | [git-cheat-sheet-bn.md](./git-cheat-sheet-bn.md) |
+| 🇨🇳 Chinês | [git-cheat-sheet-zh.md](./git-cheat-sheet-zh.md) |
+| 🇩🇪 Alemão | [git-cheat-sheet-de.md](./git-cheat-sheet-de.md) |
+| 🇪🇸 Espanhol | [git-cheat-sheet-es.md](./git-cheat-sheet-es.md) |
+| 🇬🇷 Grego | [git-cheat-sheet-el.md](./git-cheat-sheet-el.md) |
+| 🇮🇳 Hindi | [git-cheat-sheet-hi.md](./git-cheat-sheet-hi.md) |
+| 🇰🇷 Coreano | [git-cheat-sheet-ko.md](./git-cheat-sheet-ko.md) |
+| 🇧🇷 Português (Brasil) | **(atual)** |
+| 🇵🇱 Polonês | [git-cheat-sheet-pl.md](./git-cheat-sheet-pl.md) |
+| 🇹🇷 Turco | [git-cheat-sheet-tr.md](./git-cheat-sheet-tr.md) |
+
+---
+
+## 🤝 Contribuir
+
+Damos as boas-vindas a contribuições! Você pode:
+
+- 🐛 Reportar bugs ou erros de digitação
+- ✨ Adicionar novos comandos Git
+- 🌍 Traduzir para novos idiomas
+- 💡 Melhorar explicações
+- 📝 Aprimorar formatação
+
+**Como contribuir:**
+1. Faça fork deste repositório
+2. Crie seu branch de feature (`git checkout -b feature/FeatureIncrivel`)
+3. Faça commit das suas mudanças (`git commit -m 'Adicionar alguma FeatureIncrivel'`)
+4. Faça push para o branch (`git push origin feature/FeatureIncrivel`)
+5. Abra um Pull Request
+
+---
+
+## 📄 Licença
+
+Este projeto é código aberto e está disponível sob a [Licença MIT](../LICENSE).
+
+---
+
+<p align="center">
+    <b>⭐ Dê uma estrela neste repositório se foi útil!</b>
+</p>

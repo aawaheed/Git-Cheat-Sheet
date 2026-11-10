@@ -1,732 +1,866 @@
-Git and Git Flow Cheat Sheet [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome) [![Build Status](https://travis-ci.org/arslanbilal/git-cheat-sheet.svg?branch=master)](https://travis-ci.org/arslanbilal/git-cheat-sheet)
-===============
-<hr>
+# Git과 Git Flow 치트 시트
+[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
+
 <p align="center">
     <img alt="Git" src="../Img/git-logo.png" height="190" width="455">
 </p>
-<hr>
 
-# Other Available Languages:
+---
 
-1. [Arabic Git Cheat Sheet](https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-ar.md)
-2. [Chinese Git Cheat Sheet](https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-zh.md)
-3. [Hindi Git Cheat Sheet](https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-hi.md)
-4. [Turkish Git Cheat Sheet](https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-tr.md)
-5. [Spanish Git Cheat Sheet](https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-es.md)
-6. [Greek Git Cheat Sheet](https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-el.md)
-6. [Korean Git Cheat Sheet](https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-ko.md)
+## 📖 소개
 
-깃 치트시트는 당신이 모든 명령어를 외우는 일로부터 벗어나게 해드립니다.
+이 포괄적인 Git 치트 시트는 모든 Git 명령어를 외우지 않고도 Git을 마스터할 수 있도록 도와줍니다. 초보자든 숙련된 개발자든, 이 가이드는 필수적인 Git 작업에 대한 빠른 참조를 제공합니다.
 
-언제든지 기여하고 문법 실수들을 업데이트하세요. 또한 언어 파일을 자유롭게 추가할 수 있습니다.
+**기여를 환영합니다!** 자유롭게:
+- 문법 오류 수정
+- 새로운 명령어 추가
+- 다른 언어로 번역
+- 설명 개선
 
-<hr>
+---
+## 📋 목차
 
-깃 치트시트 한국어
-===============
-### Index
-* [설정](#설정)
-* [설정 파일](#설정-파일)
-* [생성](#생성)
-* [로컬 변경사항](#로컬-변경사항)
-* [검색](#검색)
-* [커밋 히스토리](#커밋-히스토리)
-* [브랜치 & 태그](#브랜치--태그)
-* [업데이트 & 배포](#업데이트--배포)
-* [병합 & 리베이스](#병합--리베이스)
-* [실행취소](#실행취소)
-* [깃 플로우](#깃-플로우)
+- [🔧 설정](#-설정)
+- [⚙️ 설정 파일](#️-설정-파일)
+- [🆕 저장소 생성](#-저장소-생성)
+- [📝 로컬 변경사항](#-로컬-변경사항)
+- [🔍 검색](#-검색)
+- [📖 커밋 히스토리](#-커밋-히스토리)
+- [📁 이동 / 이름 변경](#-이동--이름-변경)
+- [🌿 브랜치와 태그](#-브랜치와-태그)
+- [🔄 업데이트와 발행](#-업데이트와-발행)
+- [🔀 머지와 리베이스](#-머지와-리베이스)
+- [↩️ 되돌리기](#️-되돌리기)
+- [🌊 Git Flow](#-git-flow)
+- [🌍 다른 언어](#-다른-언어)
 
+---
 
-<hr>
+## 🔧 설정
 
-## 설정
+### 설정 확인
 
-##### 현재 설정 구성 보기:
-```
-$ git config --list
-```
-##### 현재 저장소 설정 구성 보기:
-```
-$ git config --local --list
+**현재 설정 보기:**
+```bash
+git config --list
 ```
 
-##### 글로벌 설정 구성 보기:
-```
-$ git config --global --list
-```
-
-##### 시스템 설정 구성 보기:
-```
-$ git config --system --list
+**저장소 설정 보기:**
+```bash
+git config --local --list
 ```
 
-##### 버전 히스토리 검토할 때 크레딧에 식별 가능한 이름을 설정:
-```
-$ git config --global user.name “[firstname lastname]”
-```
-
-##### 각 히스토리 마커와 연결할 이메일 주소 설정:
-```
-$ git config --global user.email “[valid-email]”
+**전역 설정 보기:**
+```bash
+git config --global --list
 ```
 
-##### 쉬운 리뷰를 위해서 깃의 자동 명령줄 색 설정:
-```
-$ git config --global color.ui auto
-```
-
-##### 커밋에 대한 글로벌 에디터 설정:
-```
-$ git config --global core.editor vi
+**시스템 설정 보기:**
+```bash
+git config --system --list
 ```
 
-<hr>
+### 사용자 설정
 
-## 설정 파일
-
-##### 특정 저장소 설정 파일 [--local]:
-```
-<repo>/.git/config
+**버전 기록에 사용할 이름 설정:**
+```bash
+git config --global user.name "[firstname lastname]"
 ```
 
-##### 특정 유저 설정 파일 [--global]:
-```
-~/.gitconfig
-```
-
-##### 시스템 전체 설정 파일 [--system]:
-```
-/etc/gitconfig
+**이메일 주소 설정:**
+```bash
+git config --global user.email "[valid-email]"
 ```
 
-<hr>
+### 표시 및 에디터 설정
 
-## 생성
-
-##### 기존 저장소 복제:
-
-2가지 방법이 있습니다:
-
-SSH를 통해
-
-```
-$ git clone ssh://user@domain.com/repo.git
+**자동 명령줄 색상 표시 활성화:**
+```bash
+git config --global color.ui auto
 ```
 
-HTTP를 통해
-
-```
-$ git clone http://domain.com/user/repo.git
-```
-
-##### 현재 디렉터리에 새로운 로컬 저장소 생성:
-```
-$ git init
+**커밋용 전역 에디터 설정:**
+```bash
+git config --global core.editor vi
 ```
 
-##### 특정 디렉터리에 새로운 로컬 저장소 생성:
-```
-$ git init <directory>
+---
+
+## ⚙️ 설정 파일
+
+| 범위 | 위치 | 명령어 플래그 |
+|------|------|--------------|
+| **저장소** | `<repo>/.git/config` | `--local` |
+| **사용자** | `~/.gitconfig` | `--global` |
+| **시스템** | `/etc/gitconfig` | `--system` |
+
+---
+
+## 🆕 저장소 생성
+
+### 기존 저장소 복제
+
+**SSH를 통해:**
+```bash
+git clone ssh://user@domain.com/repo.git
 ```
 
-<hr>
-
-## 로컬 변경사항
-
-##### 작업 디렉터리 변경사항:
-```
-$ git status
+**HTTPS를 통해:**
+```bash
+git clone https://domain.com/user/repo.git
 ```
 
-##### 추적된 파일들의 변경사항:
-```
-$ git diff
+### 새 저장소 초기화
+
+**현재 디렉토리에 저장소 생성:**
+```bash
+git init
 ```
 
-##### 특정 파일의 변경사항/차이 확인:
-```
-$ git diff <file>
-```
-
-##### 모든 현재 변경사항을 다음 커밋에 추가:
-```
-$ git add .
+**특정 디렉토리에 저장소 생성:**
+```bash
+git init <directory>
 ```
 
-##### &lt;file&gt;의 일부 변경사항을 다음 커밋에 추가:
-```
-$ git add -p <file>
+---
+
+## 📝 로컬 변경사항
+
+### 상태 및 차이점 확인
+
+**작업 디렉토리 상태 보기:**
+```bash
+git status
 ```
 
-##### 추적되는 파일들의 모든 로컬 변경사항을 커밋:
-```
-$ git commit -a
-```
-
-##### 이전에 stage된 변경사항을 커밋:
-```
-$ git commit
+**추적 파일의 변경사항 보기:**
+```bash
+git diff
 ```
 
-##### 메시지와 함께 커밋:
-```
-$ git commit -m 'message here'
-```
-
-##### Staging 영역 건너뛰기 및 메시지 추가하여 커밋:
-```
-$ git commit -am 'message here'
+**특정 파일의 변경사항 보기:**
+```bash
+git diff <file>
 ```
 
-##### 과거 날짜에 커밋:
-```
-$ git commit --date="`date --date='n day ago'`" -am "<Commit Message Here>"
+### 변경사항 스테이징
+
+**모든 현재 변경사항 추가:**
+```bash
+git add .
 ```
 
-##### 마지막 커밋 수정:<br>
-<em><sub>이미 배포된 커밋을 수정하지 마세요!</sub></em>
-
-```
-$ git commit -a --amend
+**특정 파일 추가:**
+```bash
+git add <filename1> <filename2>
 ```
 
-##### 이전 로그 메시지를 사용하여 마지막 커밋 수정:
-<em><sub>이미 배포된 커밋을 수정하지 마세요!</sub></em>
-
-```shell
-$ git commit --amend --no-edit
+**파일의 일부를 대화형으로 추가:**
+```bash
+git add -p <file>
 ```
 
-##### 마지막 커밋의 커밋 작성자 날짜 수정:
+### 변경사항 커밋
+
+**추적된 모든 파일의 변경사항 커밋:**
+```bash
+git commit -a
 ```
+
+**스테이징된 변경사항 커밋:**
+```bash
+git commit
+```
+
+**메시지와 함께 커밋:**
+```bash
+git commit -m 'message here'
+```
+
+**스테이징 건너뛰고 메시지와 함께 커밋:**
+```bash
+git commit -am 'message here'
+```
+
+**특정 날짜로 커밋:**
+```bash
+git commit --date="`date --date='n day ago'`" -am "<Commit Message Here>"
+```
+
+### 마지막 커밋 수정
+
+> ⚠️ **경고:** 발행된 커밋은 수정하지 마세요!
+
+**마지막 커밋 수정:**
+```bash
+git commit -a --amend
+```
+
+**커밋 메시지를 변경하지 않고 수정:**
+```bash
+git commit --amend --no-edit
+```
+
+**커미터 날짜 변경:**
+```bash
 GIT_COMMITTER_DATE="date" git commit --amend
 ```
 
-##### 마지막 커밋의 작성자 날짜 수정:
-```shell
-$ git commit --amend --date="date"
-```
-
-##### 현재 브랜치의 커밋되지 않은 변경사항을 다른 브랜치로 이동:<br>
-```
-$ git stash
-$ git checkout branch2
-$ git stash pop
-```
-
-##### 보관된 변경사항을 현재 브랜치로 복원:
-```shell
-$ git stash apply
-```
-
-#### 보관된 특정 변경사항을 현재 브랜치로 복원:
-- `git stash list`를 통해 *{stash_number}* 를 얻을 수 있습니다. 
-
-```shell
-$ git stash apply stash@{stash_number}
-```
-
-##### 마지막으로 보관된 변경사항을 제거:
-```
-$ git stash drop
-```
-
-<hr>
-
-## 검색
-
-##### 디렉터리에 있는 모든 파일에서 텍스트 검색:
-```
-$ git grep "Hello"
-```
-
-##### 버전에서 텍스트 검색:
-```
-$ git grep "Hello" v2.5
-```
-
-<hr>
-
-## 커밋 히스토리
-
-##### 모든 커밋 표시, 가장 최신 커밋부터(커밋 해시, 작성자 정보, 커밋 날짜, 커밋 제목 포함):
-```
-$ git log
-```
-
-##### 모든 커밋 표시 (커밋 해시와 커밋 메시지 포함):
-```
-$ git log --oneline
-```
-
-##### 특정 유저의 모든 커밋 표시:
-```
-$ git log --author="username"
-```
-
-##### 특정 파일에 대한 시간 경과에 따른 변경사항 표시:
-```
-$ git log -p <file>
-```
-
-##### 현재 오른쪽 remote 브랜치에만 있는 커밋 표시:
-```
-$ git log --oneline <origin/master>..<remote/master> --left-right
-```
-
-##### &lt;file&gt;에 대한 변경자, 변경사항 그리고 변경일자 표시:
-```
-$ git blame <file>
-```
-
-##### 참조 로그 표시:
-```
-$ git reflog show
-```
-
-##### 참조 로그 삭제:
-```
-$ git reflog delete
-```
-<hr>
-
-## 이동 / 이름 수정
-
-##### 파일 이름 수정:
-
-Index.txt에서 Index.html로 이름 바꾸기
-
-```
-$ git mv Index.txt Index.html
-```
-
-<hr>
-
-## 브랜치 & 태그
-
-##### 모든 로컬 브랜치 목록:
-```
-$ git branch
-```
-
-#### 모든 로컬/원격 브랜치 목록
-```
-$ git branch -a
-```
-
-##### 모든 원격 브랜치 목록:
-```
-$ git branch -r
-```
-
-##### HEAD 브랜치 전환:
-```
-$ git checkout <branch>
-```
-
-##### 다른 브랜치에서 단일 파일 전환:
-```
-$ git checkout <branch> -- <filename>
-```
-
-##### 새로운 브랜치 생성 후 HEAD 브랜치 전환:
-```
-$ git checkout -b <branch>
-```
-
-
-##### 기존 특정 브랜치에서 새로운 브랜치 생성하고 브랜치 전환:
-```
-$ git checkout -b <new_branch> <existing_branch>
-```
-
-
-#### 기존 특정 커밋에서 브랜치 생성 후 브랜치 전환:
-```
-$ git checkout <commit-hash> -b <new_branch_name>
-```
-
-
-##### 현재 HEAD 브랜치 기준으로 새 브랜치 생성:
-```
-$ git branch <new-branch>
-```
-
-##### 원격 브랜치를 기반으로 새로운 추적 브랜치 생성:
-```
-$ git branch --track <new-branch> <remote-branch>
-```
-
-##### 로컬 브랜치 삭제:
-```
-$ git branch -d <branch>
-```
-
-##### 현재 브랜치 이름 변경:
-```shell
-$ git branch -m <new_branch_name>
-```
-
-##### 로컬 브랜치 강제 삭제:
-<em><sub>머지되지 않은 변경사항을 잃게 됩니다!</sub></em>
-
-```
-$ git branch -D <branch>
-```
-
-##### `HEAD`에 태그 추가:
-```
-$ git tag <tag-name>
-```
-
-##### `HEAD`에 태그를 추가하고 메시지를 포함할 편집기 열기:
-```
-$ git tag -a <tag-name>
-```
-
-##### `HEAD`에 메시지를 포함하는 태그 추가:
-```
-$ git tag <tag-name> -am 'message here'
-```
-
-##### 모든 태그 목록:
-```
-$ git tag
-```
-
-##### 메시지 (태그 메시지, 없다면 커밋 메시지)와 함께 모든 태그 목록 표시:
-```
-$ git tag -n
-```
-
-<hr>
-
-## 업데이트 & 배포
-
-##### 현재 구성된 모든 원격 저장소 목록 표시:
-```
-$ git remote -v
-```
-
-##### 특정 원격 저장소 정보 표시:
-```
-$ git remote show <remote>
-```
-
-##### 이름 &lt;remote&gt; 새로운 원격 저장소 추가:
-```
-$ git remote add <remote> <url>
-```
-
-##### &lt;remote&gt;에서 &lt;new_remote&gt;로 원격 저장소의 이름 수정:
-```
-$ git remote rename <remote> <new_remote>
-```
-
-##### 등록된 원격 저장소 삭제:
-```
-$ git remote rm <remote>
-```
-
-<em><sub>참고: git remote rm 은 서버에서 원격 저장소를 삭제하지 않습니다. 로컬 저장소에서 원격정보 및 해당 참조를 제거만 합니다.</sub></em>
-
-##### &lt;remote&gt;에서 모든 변경사항 다운로드하지만 HEAD와 통합하지 않음:
-```
-$ git fetch <remote>
-```
-
-##### 변경사항을 다운로드하고 HEAD와 병합:
-```
-$ git remote pull <remote> <url>
-```
-
-##### HEAD에서 로컬 저장소로 모든 변경사항을 가져옴:   
-```
-$ git pull origin master
-```
-
-##### 병합하지 않고 HEAD에서 로컬 저장소로 모든 변경사항을 가져옴:
-```
-$ git pull --rebase <remote> <branch>
-```
-
-##### 로컬 변경사항을 원격 저장소에 배포:
-```
-$ git push remote <remote> <branch>
-```
-
-##### 원격 저장소에서 브랜치 삭제:
-```
-$ git push <remote> :<branch> (since Git v1.5.0)
-```
-혹은
-```
-$ git push <remote> --delete <branch> (since Git v1.7.0)
-```
-
-##### 태그 배포:
-```
-$ git push --tags
-```
-<hr>
-
-#### 병합 툴(편집기)을 글로벌 설정
+**작성자 날짜 변경:**
 ```bash
-$ git config --global merge.tool meld
+git commit --amend --date="date"
 ```
 
-##### 구성된 병합 툴로 충돌 해결:
-```
-$ git mergetool
+### 변경사항 스태시
+
+**현재 변경사항 임시 저장:**
+```bash
+git stash
 ```
 
-## 병합 & 리베이스
-
-##### 현재 HEAD로 브랜치 병합:
-```
-$ git merge <branch>
+**마지막으로 스태시한 변경사항 적용:**
+```bash
+git stash apply
 ```
 
-##### 현재 HEAD에 &lt;branch&gt;로 리베이스:<br>
-<em><sub>이미 배포된 커밋을 리베이스하지 마세요!</sub></em>
+**특정 스태시 적용:**
+```bash
+git stash apply stash@{stash_number}
+```
+> `git stash list`를 사용하여 사용 가능한 스태시 확인
 
-```
-$ git rebase <branch>
-```
-
-##### 리베이스 중단:
-```
-$ git rebase --abort
-```
-
-##### 충돌 해결 후 리베이스 재개:
-```
-$ git rebase --continue
+**마지막 스태시 제거:**
+```bash
+git stash drop
 ```
 
-##### 편집기를 사용하여 수동으로 충돌을 해결하고 해당 파일에 표시:
-```
-$ git add <resolved-file>
-```
-
-```
-$ git rm <resolved-file>
+**커밋되지 않은 변경사항을 다른 브랜치로 이동:**
+```bash
+git stash
+git checkout branch2
+git stash pop
 ```
 
-##### 커밋들을 압축:
-```
-$ git rebase -i <commit-just-before-first>
+---
+
+## 🔍 검색
+
+### 텍스트 검색
+
+**모든 파일에서 텍스트 검색:**
+```bash
+git grep "Hello"
 ```
 
-이제 이걸
-
+**특정 버전에서 검색:**
+```bash
+git grep "Hello" v2.5
 ```
+
+### 커밋 검색
+
+**특정 키워드를 도입한 커밋 찾기:**
+```bash
+git log -S 'keyword'
+```
+
+**정규표현식으로 검색:**
+```bash
+git log -S 'keyword' --pickaxe-regex
+```
+
+---
+
+## 📖 커밋 히스토리
+
+### 기본 히스토리
+
+**모든 커밋 보기 (상세):**
+```bash
+git log
+```
+
+**커밋 보기 (한 줄씩):**
+```bash
+git log --oneline
+```
+
+**특정 작성자의 커밋 보기:**
+```bash
+git log --author="username"
+```
+
+**특정 파일의 변경사항 보기:**
+```bash
+git log -p <file>
+```
+
+### 고급 히스토리
+
+**브랜치 비교:**
+```bash
+git log --oneline <origin/master>..<remote/master> --left-right
+```
+
+**누가 언제 무엇을 변경했는지 보기:**
+```bash
+git blame <file>
+```
+
+### 참조 로그
+
+**참조 로그 보기:**
+```bash
+git reflog show
+```
+
+**참조 로그 삭제:**
+```bash
+git reflog delete
+```
+
+---
+
+## 📁 이동 / 이름 변경
+
+**파일 이름 변경:**
+```bash
+git mv Index.txt Index.html
+```
+
+---
+
+## 🌿 브랜치와 태그
+
+### 브랜치 목록
+
+**로컬 브랜치 목록:**
+```bash
+git branch
+```
+
+**모든 브랜치 목록 (로컬 + 원격):**
+```bash
+git branch -a
+```
+
+**원격 브랜치 목록:**
+```bash
+git branch -r
+```
+
+**머지된 브랜치 목록:**
+```bash
+git branch --merged
+```
+
+### 브랜치 전환 및 생성
+
+**기존 브랜치로 전환:**
+```bash
+git checkout <branch>
+```
+
+**새 브랜치를 생성하고 전환:**
+```bash
+git checkout -b <branch>
+```
+
+**이전 브랜치로 전환:**
+```bash
+git checkout -
+```
+
+**기존 브랜치에서 새 브랜치 생성:**
+```bash
+git checkout -b <new_branch> <existing_branch>
+```
+
+**특정 커밋에서 브랜치 생성:**
+```bash
+git checkout <commit-hash> -b <new_branch_name>
+```
+
+**전환 없이 브랜치 생성:**
+```bash
+git branch <new-branch>
+```
+
+**추적 브랜치 생성:**
+```bash
+git branch --track <new-branch> <remote-branch>
+```
+
+### 브랜치 작업
+
+**다른 브랜치에서 단일 파일 체크아웃:**
+```bash
+git checkout <branch> -- <filename>
+```
+
+**다른 브랜치의 특정 커밋 적용:**
+```bash
+git cherry-pick <commit hash>
+```
+
+**현재 브랜치 이름 변경:**
+```bash
+git branch -m <new_branch_name>
+```
+
+**로컬 브랜치 삭제:**
+```bash
+git branch -d <branch>
+```
+
+**로컬 브랜치 강제 삭제:**
+```bash
+git branch -D <branch>
+```
+> ⚠️ **경고:** 머지되지 않은 변경사항이 손실됩니다!
+
+### 태그
+
+**HEAD에 태그 생성:**
+```bash
+git tag <tag-name>
+```
+
+**주석이 달린 태그 생성:**
+```bash
+git tag -a <tag-name>
+```
+
+**메시지와 함께 태그 생성:**
+```bash
+git tag <tag-name> -am 'message here'
+```
+
+**모든 태그 목록:**
+```bash
+git tag
+```
+
+**메시지와 함께 태그 목록:**
+```bash
+git tag -n
+```
+
+---
+
+## 🔄 업데이트와 발행
+
+### 원격 저장소 관리
+
+**설정된 원격 저장소 목록:**
+```bash
+git remote -v
+```
+
+**원격 저장소 정보 보기:**
+```bash
+git remote show <remote>
+```
+
+**새 원격 저장소 추가:**
+```bash
+git remote add <remote> <url>
+```
+
+**원격 저장소 이름 변경:**
+```bash
+git remote rename <remote> <new_remote>
+```
+
+**원격 저장소 제거:**
+```bash
+git remote rm <remote>
+```
+> ℹ️ **참고:** 이 명령어는 로컬의 원격 참조만 제거하며, 원격 저장소 자체는 삭제하지 않습니다.
+
+### 가져오기와 풀
+
+**머지 없이 변경사항 다운로드:**
+```bash
+git fetch <remote>
+```
+
+**변경사항 다운로드 및 머지:**
+```bash
+git pull <remote> <branch>
+```
+
+**메인 브랜치의 변경사항 가져오기:**
+```bash
+git pull origin master
+```
+
+**리베이스와 함께 풀:**
+```bash
+git pull --rebase <remote> <branch>
+```
+
+### 푸시 및 발행
+
+**로컬 변경사항 발행:**
+```bash
+git push <remote> <branch>
+```
+
+**원격 브랜치 삭제:**
+```bash
+# Git v1.7.0+
+git push <remote> --delete <branch>
+
+# Git v1.5.0+
+git push <remote> :<branch>
+```
+
+**태그 발행:**
+```bash
+git push --tags
+```
+
+---
+
+## 🔀 머지와 리베이스
+
+### 머지 작업
+
+**현재 HEAD에 브랜치 머지:**
+```bash
+git merge <branch>
+```
+
+**전역 머지 도구 설정:**
+```bash
+git config --global merge.tool meld
+```
+
+**설정된 머지 도구 사용:**
+```bash
+git mergetool
+```
+
+### 리베이스 작업
+
+> ⚠️ **경고:** 발행된 커밋은 리베이스하지 마세요!
+
+**현재 HEAD를 브랜치에 리베이스:**
+```bash
+git rebase <branch>
+```
+
+**리베이스 중단:**
+```bash
+git rebase --abort
+```
+
+**충돌 해결 후 리베이스 계속:**
+```bash
+git rebase --continue
+```
+
+### 충돌 해결
+
+**파일을 해결됨으로 표시:**
+```bash
+git add <resolved-file>
+```
+
+**해결된 파일 제거:**
+```bash
+git rm <resolved-file>
+```
+
+### 커밋 스쿼시
+
+**스쿼시를 위한 대화형 리베이스:**
+```bash
+git rebase -i <commit-just-before-first>
+```
+
+**스쿼시 설정 예시:**
+```
+# 이전
 pick <commit_id>
 pick <commit_id2>
 pick <commit_id3>
-```
 
-이렇게 바꿉니다,
-
-```
+# 이후 (commit_id2와 commit_id3를 commit_id에 스쿼시)
 pick <commit_id>
 squash <commit_id2>
 squash <commit_id3>
 ```
-<hr>
 
-## 실행취소
+---
 
-##### 작업 디렉터리의 모든 로컬 변경사항 취소:
-```
-$ git reset --hard HEAD
-```
+## ↩️ 되돌리기
 
-##### Staging 영역에서 모든 파일 빼내기 (즉 마지막 `git add`를 실행 취소):
-```
-$ git reset HEAD
-```
+### 변경사항 폐기
 
-##### 특정 파일의 로컬 변경사항 취소:
-```
-$ git checkout HEAD <file>
-```
-
-##### 커밋 되돌리기 (되돌리기 위한 변경사항을 포함하는 새 커밋을 생성함):
-```
-$ git revert <commit>
-```
-
-##### HEAD 포인터를 이전 커밋으로 재설정하고 그 이후의 모든 변경 사항을 삭제:
-```
-$ git reset --hard <commit>
-```
-
-##### HEAD 포인터를 원격 브랜치의 현재 상태로 재설정:
-```
-$ git reset --hard <remote/branch> e.g., upstream/master, origin/my-feature
-```
-
-##### HEAD 포인터를 이전 커밋으로 재설정하고 모든 변경사항을 Unstaging 상태로 유지:
-```
-$ git reset <commit>
-```
-
-##### HEAD 포인터를 이전 커밋으로 재설정하고 커밋되지 않은 로컬 변경사항 유지:
-```
-$ git reset --keep <commit>
-```
-
-##### .gitignore에 추가되기 전에 실수로 커밋된 파일 제거:
-```
-$ git rm -r --cached .
-$ git add .
-$ git commit -m "remove xyz file"
-```
-<hr>
-
-## 깃 플로우
-개선된 [Git-flow](https://github.com/petervanderdoes/gitflow-avh)
-
-### 인덱스
-* [설정](#설정)
-* [시작하기](#시작하기)
-* [기능](#기능)
-* [릴리즈 생성](#릴리즈-생성)
-* [핫픽스](#핫픽스)
-* [명령어들](#명령어들)
-
-<hr>
-
-### 설정
-###### 필수 구성 요소로 Git을 설치해야 합니다. Git 플로우는 OSX, 리눅스 및 윈도우즈에서 작동합니다.
-
-##### OSX Homebrew:
-```
-$ brew install git-flow-avh
-```
-
-##### OSX Macports:
-```
-$ port install git-flow
-```
-
-##### Linux (Debian-based):
-```
-$ sudo apt-get install git-flow
-```
-
-##### Windows (Cygwin):
-###### git-flow를 설치하기 위해서는 wget과 util-linux가 필요합니다.
+**모든 로컬 변경사항 폐기:**
 ```bash
-$ wget -q -O - --no-check-certificate https://raw.githubusercontent.com/petervanderdoes/gitflow/develop/contrib/gitflow-installer.sh install <state> | bash
+git reset --hard HEAD
 ```
-<hr>
 
-### 시작하기
-###### 프로젝트 설정을 커스텀하려면 Git 플로우를 초기화해야합니다. 기존 git 저장소 내에서 초기화하여 git-flow 사용을 시작하십시오:
-##### 초기화:
-###### 브랜치의 이름 규칙에 관한 몇 가지 질문에 답해야합니다. 기본값을 사용하는 것이 좋습니다.
-```shell
+**모든 파일 언스테이지:**
+```bash
+git reset HEAD
+```
+
+**특정 파일의 변경사항 폐기:**
+```bash
+git checkout HEAD <file>
+```
+
+### 리셋 작업
+
+**이전 커밋으로 리셋 (모든 변경사항 폐기):**
+```bash
+git reset --hard <commit>
+```
+
+**원격 브랜치 상태로 리셋:**
+```bash
+git reset --hard <remote/branch>
+# 예시: git reset --hard upstream/master
+```
+
+**변경사항을 언스테이지 상태로 보존하며 리셋:**
+```bash
+git reset <commit>
+```
+
+**커밋되지 않은 로컬 변경사항을 보존하며 리셋:**
+```bash
+git reset --keep <commit>
+```
+
+### 커밋 되돌리기
+
+**커밋 되돌리기 (반대 변경사항으로 새 커밋 생성):**
+```bash
+git revert <commit>
+```
+
+### 무시된 파일 정리
+
+**무시되어야 할 실수로 커밋된 파일 제거:**
+```bash
+git rm -r --cached .
+git add .
+git commit -m "remove ignored files"
+```
+
+---
+
+## 🌊 Git Flow
+
+**개선된 Git-flow:** [git-flow-avh](https://github.com/petervanderdoes/gitflow-avh)
+
+### 📋 목차
+- [🔧 설정](#-설정-1)
+- [🚀 시작하기](#-시작하기)
+- [✨ 기능](#-기능)
+- [🎁 릴리스 만들기](#-릴리스-만들기)
+- [🔥 핫픽스](#-핫픽스)
+- [📊 명령어 개요](#-명령어-개요)
+
+---
+
+### 🔧 설정
+
+> **전제 조건:** 작동하는 Git 설치가 필요합니다. Git-flow는 macOS, Linux, Windows에서 작동합니다.
+
+**macOS (Homebrew):**
+```bash
+brew install git-flow-avh
+```
+
+**macOS (MacPorts):**
+```bash
+port install git-flow
+```
+
+**Linux (Debian 기반):**
+```bash
+sudo apt-get install git-flow
+```
+
+**Windows (Cygwin):**
+> wget과 util-linux가 필요합니다
+```bash
+wget -q -O - --no-check-certificate https://raw.githubusercontent.com/petervanderdoes/gitflow/develop/contrib/gitflow-installer.sh install <state> | bash
+```
+
+---
+
+### 🚀 시작하기
+
+Git-flow는 프로젝트 설정을 커스터마이즈하기 위해 초기화가 필요합니다.
+
+**초기화 (대화형):**
+```bash
 git flow init
 ```
-혹은
-###### 기본값 사용
-```shell
+> 브랜치 명명 규칙에 대한 질문에 답하게 됩니다. 기본값을 권장합니다.
+
+**초기화 (기본값 사용):**
+```bash
 git flow init -d
 ```
-<hr>
 
-### 기능
-###### 릴리즈를위한 새로운 기능을 개발하십시오. 일반적으로 개발자 저장소에만 존재합니다.
-##### 새로운 기능 시작:
-###### 이 작업은 'develop'을 기반으로 새 기능 브랜치를 만들고 전환합니다.
-```
+---
+
+### ✨ 기능
+
+기능은 향후 릴리스를 위한 새로운 기능을 개발하기 위한 것입니다. 일반적으로 개발자 저장소에만 존재합니다.
+
+**새 기능 시작:**
+```bash
 git flow feature start MYFEATURE
 ```
+> 'develop'을 기반으로 기능 브랜치를 생성하고 해당 브랜치로 전환합니다
 
-##### 기능 완료:
-###### 기능 개발을 완료합니다. 이 작업은 다음을 수행합니다:
-###### 1) MYFEATURE를 'develop'에 병합.
-###### 2) 기능 브랜치를 제거.
-###### 3) 'develop' 브랜치로 재전환
-```
+**기능 완료:**
+```bash
 git flow feature finish MYFEATURE
 ```
+> 이 명령어는:
+> 1. MYFEATURE를 'develop'에 머지
+> 2. 기능 브랜치 제거
+> 3. 'develop'으로 다시 전환
 
-##### 기능 배포:
-###### 공동으로 기능을 개발하고 있습니까? 다른 사용자가 사용할 수 있도록 기능을 원격 서버에 배포합니다.
-```
+**기능 발행 (협업용):**
+```bash
 git flow feature publish MYFEATURE
 ```
 
-##### 배포된 기능 가져오기:
-###### 다른 사용자에 의해 배포된 기능을 가져오기.
-```
+**발행된 기능 가져오기:**
+```bash
 git flow feature pull origin MYFEATURE
 ```
 
-##### 오리진 기능 추적:
-###### 다음을 통해서 오리진의 기능을 추적할 수 있습니다.
-```
+**원격 기능 추적:**
+```bash
 git flow feature track MYFEATURE
 ```
-<hr>
 
-### 릴리즈 생성
-###### 새로운 프로덕션 릴리즈 준비를 지원하고 사소한 버그 수정 및 릴리즈를위한 메타 데이터 준비를 허용합니다.
+---
 
-##### 릴리즈 시작:
-###### 릴리스를 시작하려면 git flow release 명령을 사용하십시오. 'develop'브랜치에서 생성 된 릴리즈 브랜치를 생성합니다. 릴리즈를 시작할 [BASE] 커밋 sha-1 해시를 선택적으로 제공 할 수 있습니다. 커밋은 'develop'브랜치에 있어야합니다. 
-```
+### 🎁 릴리스 만들기
+
+릴리스는 새 프로덕션 릴리스 준비를 지원하며, 사소한 버그 수정과 메타데이터 준비를 허용합니다.
+
+**릴리스 시작:**
+```bash
 git flow release start RELEASE [BASE]
 ```
-###### 다른 개발자의 릴리즈 커밋을 허용하도록 릴리스 브랜치를 만든 후 배포하는 것이 좋습니다. 다음 명령을 사용하여 기능 배포와 유사하게 수행하십시오. 
-```
+> 'develop'에서 릴리스 브랜치를 생성합니다. 선택적으로 [BASE] 커밋 SHA-1을 지정할 수 있습니다.
+
+**릴리스 발행:**
+```bash
 git flow release publish RELEASE
 ```
-###### (이 명령어를 통해 원격 저장소 릴리즈를 추적할 수 있습니다: ```git flow release track RELEASE```)
 
-##### 릴리즈 완료:
-###### 릴리즈를 완료하는 것은 깃 브랜치의 중요한 단계 중 하나입니다. 이것은 몇 가지 작업을 수행합니다:
-###### 1) 릴리즈 브랜치를 'master'브랜치로 다시 병합합니다
-###### 2) 릴리즈에 이름으로 태그 지정
-###### 3) 릴리즈를 'develop'로 역으로 병합
-###### 4) 릴리즈 브랜치 삭제
+**원격 릴리스 추적:**
+```bash
+git flow release track RELEASE
 ```
+
+**릴리스 완료:**
+```bash
 git flow release finish RELEASE
 ```
-###### ```git push --tags```로 태그를 푸시하는 것을 잊지마세요 
+> 이 명령어는:
+> 1. 릴리스 브랜치를 'master'에 머지
+> 2. 릴리스에 태그 지정
+> 3. 릴리스를 'develop'에 역머지
+> 4. 릴리스 브랜치 제거
 
-<hr>
+> 💡 **잊지 마세요:** `git push --tags`로 태그를 푸시하세요
 
-### 핫픽스
-###### 핫픽스는 라이브 프로덕션 버전의 원치 않는 상태에 즉시 대응해야 하는 필요성 때문에 발생합니다. 프로덕션 버전을 표시하는 마스터 브랜치의 해당 태그에서 분기될 수 있습니다. 
+---
 
-##### 깃 플로우 핫픽스 시작:
-###### 다른 깃 플로우 명령어처럼 핫픽스는 다음으로 시작됩니다
+### 🔥 핫픽스
+
+핫픽스는 라이브 프로덕션 버전의 심각한 문제를 해결합니다. master의 해당 태그에서 브랜치됩니다.
+
+**핫픽스 시작:**
+```bash
+git flow hotfix start VERSION [BASENAME]
 ```
-$ git flow hotfix start VERSION [BASENAME]
-```
-###### 위 명령어의 버전 인수를 통해 새로운 릴리즈 이름을 표시합니다. 선택적으로 시작할 기본 이름을 설정할 수 있습니다.
 
-##### 핫픽스 완료:
-###### 핫픽스를 완료하면 다시 develop/master 브랜치로 병합됩니다. 또한 마스터 병합에는 핫픽스 버전 태그가 지정됩니다.
-```
+**핫픽스 완료:**
+```bash
 git flow hotfix finish VERSION
 ```
-<hr>
+> 'develop'과 'master' 모두에 역머지되고, master 머지에 태그가 지정됩니다
 
-### 명령어들
-<p align="center">
-    <img alt="Git" src="../Img/git-flow-commands.png" height="270" width="460">
-</p>
-<hr>
+---
 
-### 깃 플로우 스키마
+### 📊 명령어 개요
 
 <p align="center">
-    <img alt="Git" src="../Img/git-flow-commands-without-flow.png">
+    <img alt="Git Flow Commands" src="../Img/git-flow-commands.png" height="270" width="460">
 </p>
-<hr>
+
+### 🌊 Git Flow 스키마
+
+<p align="center">
+    <img alt="Git Flow Schema" src="../Img/git-flow-commands-without-flow.png">
+</p>
+
+---
+
+
+## 🌍 다른 언어
+
+이 치트 시트는 여러 언어로 제공됩니다:
+
+| 언어 | 링크 |
+|------|------|
+| 🇺🇸 영어 | [README.md](../README.md) |
+| 🇸🇦 아랍어 | [git-cheat-sheet-ar.md](git-cheat-sheet-ar.md) |
+| 🇧🇩 벵골어 | [git-cheat-sheet-bn.md](git-cheat-sheet-bn.md) |
+| 🇧🇷 브라질 포르투갈어 | [git-cheat-sheet-pt_BR.md](git-cheat-sheet-pt_BR.md) |
+| 🇨🇳 중국어 | [git-cheat-sheet-zh.md](git-cheat-sheet-zh.md) |
+| 🇩🇪 독일어 | [git-cheat-sheet-de.md](git-cheat-sheet-de.md) |
+| 🇬🇷 그리스어 | [git-cheat-sheet-el.md](git-cheat-sheet-el.md) |
+| 🇮🇳 힌디어 | [git-cheat-sheet-hi.md](git-cheat-sheet-hi.md) |
+| 🇰🇷 한국어 | **(현재)** |
+| 🇵🇱 폴란드어 | [git-cheat-sheet-pl.md](git-cheat-sheet-pl.md) |
+| 🇪🇸 스페인어 | [git-cheat-sheet-es.md](git-cheat-sheet-es.md) |
+| 🇹🇷 터키어 | [git-cheat-sheet-tr.md](git-cheat-sheet-tr.md) |
+
+---
+
+## 🤝 기여하기
+
+기여를 환영합니다! 다음과 같이 할 수 있습니다:
+
+- 🐛 버그나 오타 보고
+- ✨ 새 Git 명령어 추가
+- 🌍 새로운 언어로 번역
+- 💡 설명 개선
+- 📝 포맷 개선
+
+**기여하는 방법:**
+1. 이 저장소를 포크하세요
+2. 기능 브랜치를 생성하세요 (`git checkout -b feature/AmazingFeature`)
+3. 변경사항을 커밋하세요 (`git commit -m 'Add some AmazingFeature'`)
+4. 브랜치에 푸시하세요 (`git push origin feature/AmazingFeature`)
+5. Pull Request를 여세요
+
+---
+
+## 📄 라이센스
+
+이 프로젝트는 오픈 소스이며 [MIT 라이센스](../LICENSE) 하에 제공됩니다.
+
+---
+
+<p align="center">
+    <b>⭐ 이 저장소가 도움이 되었다면 별표를 눌러주세요!</b>
+</p>

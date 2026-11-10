@@ -1,607 +1,866 @@
-Git Cheat Sheet Turkish [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
-===============
+# Git ve Git Flow Kopya Kağıdı
+[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
+<p align="center">
+    <img alt="Git" src="../Img/git-logo.png" height="190" width="455">
+</p>
 
-### Index
-* [Kurulum](#kurulum)
-* [Yapılandırma](#yapılandırma)
-* [Oluşturma](#oluşturma)
-* [Yerel Değişiklikler](#yerel-değişiklikler)
-* [Arama](#arama)
-* [Commit Geçmişi](#commit-geçmişi)
-* [Branches & Tags(Etiketler)](#branches--tags)
-* [Güncelleştirme & Yayınlama](#güncelleştirme--yayınlama)
-* [Merge(Birleştirme) & Rebase](#merge--rebase)
-* [Geri Alma](#geri-alma)
-* [Git Flow](#git-flow)
+---
 
-<hr>
+## 📖 Hakkında
 
-## Kurulum
+Bu kapsamlı Git kopya kağıdı, her şeyi ezberlemenize gerek kalmadan Git komutlarında ustalaşmanıza yardımcı olur. İster yeni başlayan ister deneyimli bir geliştirici olun, bu rehber temel Git işlemleri için hızlı bir referans sağlar.
 
-##### Mevcut ayarları göstermek:
-```
-$ git config --list
-```
-##### Repository(depo) ayarlarını göstermek:
-```
-$ git config --local --list
-```
+**Katkılarınızı Bekliyoruz!** Yapabilecekleriniz:
+- Dilbilgisi hatalarını düzeltme
+- Yeni komutlar ekleme
+- Kendi dilinize çevirme
+- Açıklamaları iyileştirme
 
-##### Global ayarları göstermek:
-```
-$ git config --global --list
-```
+---
+## 📋 İçindekiler
 
-##### Sistem ayarlarını göstermek:
-```
-$ git config --system --list
-```
+- [🔧 Kurulum](#-kurulum)
+- [⚙️ Yapılandırma Dosyaları](#️-yapılandırma-dosyaları)
+- [🆕 Depo Oluşturma](#-depo-oluşturma)
+- [📝 Yerel Değişiklikler](#-yerel-değişiklikler)
+- [🔍 Arama](#-arama)
+- [📖 Commit Geçmişi](#-commit-geçmişi)
+- [📁 Taşıma / Yeniden Adlandırma](#-taşıma--yeniden-adlandırma)
+- [🌿 Dallar ve Etiketler](#-dallar-ve-etiketler)
+- [🔄 Güncelleme ve Yayınlama](#-güncelleme-ve-yayınlama)
+- [🔀 Birleştirme ve Rebase](#-birleştirme-ve-rebase)
+- [↩️ Geri Alma](#️-geri-alma)
+- [🌊 Git Flow](#-git-flow)
+- [🌍 Diğer Diller](#-diğer-diller)
 
-##### Sürüm geçmişinde gözükecek adı belirlemek:
-```
-$ git config --global user.name “[firstname lastname]”
-```
+---
 
-##### Sürüm geçmişinde ilişkilendirilecek e-postayı belirlemek:
-```
-$ git config --global user.email “[valid-email]”
+## 🔧 Kurulum
+
+### Yapılandırmayı Görüntüleme
+
+**Mevcut yapılandırmayı göster:**
+```bash
+git config --list
 ```
 
-##### Otomatik komut satırı renklendirmesini ayarlamak:
-```
-$ git config --global color.ui auto
-```
-
-##### Commitler için global yazı editörünü ayarlamak:
-```
-$ git config --global core.editor vi
+**Depo yapılandırmasını göster:**
+```bash
+git config --local --list
 ```
 
-<hr>
-
-## Yapılandırma
-
-##### Repositorye(depoya) özgü yapılandırma dosyası [--local]:
-```
-<repo>/.git/config
+**Global yapılandırmayı göster:**
+```bash
+git config --global --list
 ```
 
-##### Kullanıcıya özel yapılandırma dosyası [--global]:
-```
-~/.gitconfig
-```
-
-##### Sistem genelinde yapılandırma dosyası [--system]:
-```
-/etc/gitconfig
+**Sistem yapılandırmasını göster:**
+```bash
+git config --system --list
 ```
 
-<hr>
+### Kullanıcı Yapılandırması
 
-## Oluşturma
-
-##### Var olan bir repositoryi(depoyu) klonlama:
-```
-$ git clone ssh://user@domain.com/repo.git
+**Sürüm geçmişi için adınızı ayarlayın:**
+```bash
+git config --global user.name "[firstname lastname]"
 ```
 
-##### Yeni bir yerel repository(depo) oluşturma:
-```
-$ git init
-```
-
-##### Belirli dizinde yerel repository(depo) oluşturma:
-```
-$ git init <directory>
-
-<hr>
-
-## Yerel Değişiklikler
-
-##### Çalışılan dizindeki dosyaların değişimi:
-```
-$ git status
+**E-posta adresinizi ayarlayın:**
+```bash
+git config --global user.email "[valid-email]"
 ```
 
-##### İzlenen dosyalardaki değişiklikler:
-```
-$ git diff
+### Görüntüleme ve Editör Ayarları
+
+**Otomatik komut satırı renklendirmesini etkinleştirin:**
+```bash
+git config --global color.ui auto
 ```
 
-##### Tüm güncel değişiklikleri sonraki commite ekleme:
-```
-$ git add .
-```
-
-##### Sonraki commite &lt;dosyasındaki&gt; bazı değişikleri ekleme:
-```
-$ git add -p <file>
+**Commit'ler için global editörü ayarlayın:**
+```bash
+git config --global core.editor vi
 ```
 
-##### Tüm izlenen dosyalardaki yerel değişiklikleri Commitleme:
-```
-$ git commit -a
+---
+
+## ⚙️ Yapılandırma Dosyaları
+
+| Kapsam | Konum | Komut Bayrağı |
+|--------|-------|---------------|
+| **Depo** | `<repo>/.git/config` | `--local` |
+| **Kullanıcı** | `~/.gitconfig` | `--global` |
+| **Sistem** | `/etc/gitconfig` | `--system` |
+
+---
+
+## 🆕 Depo Oluşturma
+
+### Mevcut Depoyu Klonlama
+
+**SSH ile:**
+```bash
+git clone ssh://user@domain.com/repo.git
 ```
 
-##### Önceden hazırlanan değişiklikleri commitleme:
-```
-$ git commit
-```
-
-##### Mesaj ile commitleme:
-```
-$ git commit -m 'message here'
+**HTTPS ile:**
+```bash
+git clone https://domain.com/user/repo.git
 ```
 
-##### Önceki belli bir tarihe commitleme:
-```
-git commit --date="`date --date='n day ago'`" -am "Commit Message"
+### Yeni Depo Başlatma
+
+**Mevcut dizinde depo oluştur:**
+```bash
+git init
 ```
 
-##### Son commiti değiştirme:<br>
-###### Yayınlanan commite değişiklik yapmayın!
-```
-$ git commit --amend
+**Belirli dizinde depo oluştur:**
+```bash
+git init <directory>
 ```
 
-##### Mevcut branchteki kaydedilmemiş commitleri diğer bazı branchlere taşıma:
+---
+
+## 📝 Yerel Değişiklikler
+
+### Durum ve Farkları Kontrol Etme
+
+**Çalışma dizini durumunu görüntüle:**
+```bash
+git status
 ```
+
+**İzlenen dosyalardaki değişiklikleri göster:**
+```bash
+git diff
+```
+
+**Belirli dosyadaki değişiklikleri göster:**
+```bash
+git diff <file>
+```
+
+### Değişiklikleri Hazırlama
+
+**Tüm mevcut değişiklikleri ekle:**
+```bash
+git add .
+```
+
+**Belirli dosyaları ekle:**
+```bash
+git add <filename1> <filename2>
+```
+
+**Bir dosyanın parçalarını etkileşimli olarak ekle:**
+```bash
+git add -p <file>
+```
+
+### Değişiklikleri Kaydetme
+
+**Tüm izlenen dosya değişikliklerini kaydet:**
+```bash
+git commit -a
+```
+
+**Hazırlanmış değişiklikleri kaydet:**
+```bash
+git commit
+```
+
+**Mesajla kaydet:**
+```bash
+git commit -m 'message here'
+```
+
+**Hazırlama adımını atlayarak mesajla kaydet:**
+```bash
+git commit -am 'message here'
+```
+
+**Belirli tarihle kaydet:**
+```bash
+git commit --date="`date --date='n day ago'`" -am "<Commit Message Here>"
+```
+
+### Son Commit'i Değiştirme
+
+> ⚠️ **Uyarı:** Yayınlanmış commit'leri değiştirmeyin!
+
+**Son commit'i düzelt:**
+```bash
+git commit -a --amend
+```
+
+**Commit mesajını değiştirmeden düzelt:**
+```bash
+git commit --amend --no-edit
+```
+
+**Committer tarihini değiştir:**
+```bash
+GIT_COMMITTER_DATE="date" git commit --amend
+```
+
+**Yazar tarihini değiştir:**
+```bash
+git commit --amend --date="date"
+```
+
+### Değişiklikleri Saklama
+
+**Mevcut değişiklikleri geçici olarak sakla:**
+```bash
+git stash
+```
+
+**Son saklanan değişiklikleri uygula:**
+```bash
+git stash apply
+```
+
+**Belirli bir stash'i uygula:**
+```bash
+git stash apply stash@{stash_number}
+```
+> Mevcut stash'leri görmek için `git stash list` kullanın
+
+**Son stash'i kaldır:**
+```bash
+git stash drop
+```
+
+**Kaydedilmemiş değişiklikleri başka bir dala taşı:**
+```bash
 git stash
 git checkout branch2
 git stash pop
 ```
 
-##### Saklanan değişiklikleri mevcut branche geri yükleme:
-```shell
-$ git stash apply
+---
+
+## 🔍 Arama
+
+### Metin Arama
+
+**Tüm dosyalarda metin ara:**
+```bash
+git grep "Hello"
 ```
 
-#### İstenilen saklanma yerini mevcut branche geri yükleme:
-- *{stash_number}* `git stash list` ile elde edilebilir
-
-```shell
-$ git stash apply stash@{stash_number}
+**Belirli sürümde ara:**
+```bash
+git grep "Hello" v2.5
 ```
 
-##### Saklanan değişiklikleri kaldırma:
-```
-$ git stash drop
+### Commit Arama
+
+**Belirli anahtar kelimeyi ekleyen commit'leri bul:**
+```bash
+git log -S 'keyword'
 ```
 
-<hr>
-
-## Arama
-
-##### Bir metni dizindeki bütün dosyalarda aramak:
-```
-$ git grep "Merhaba"
+**Düzenli ifade ile ara:**
+```bash
+git log -S 'keyword' --pickaxe-regex
 ```
 
-##### Bir metni herhangi bir sürüm içinde aramak:
-```
-$ git grep "Merhaba" v2.5
+---
+
+## 📖 Commit Geçmişi
+
+### Temel Geçmiş
+
+**Tüm commit'leri göster (ayrıntılı):**
+```bash
+git log
 ```
 
-##### Belirli bir kelimeyi içeren commitleri göstermek:
-```
-$ git log -S "keyword"
-```
-
-##### Belirli bir kelimeyi içeren commitleri göstermek (düzenli ifadeler kullanarak):
-```
-$ git log -S "keyword" --pickaxe-regex
+**Commit'leri göster (her biri tek satır):**
+```bash
+git log --oneline
 ```
 
-<hr>
-
-## Commit Geçmişi
-
-##### Tüm commitleri en yenisinden başlayarak listeler:
-```
-$ git log
+**Belirli yazarın commit'lerini göster:**
+```bash
+git log --author="username"
 ```
 
-##### Tüm commitleri görüntüler(Sadece commit hash ve commit mesajı görüntülenir.):
-```
-$ git log --oneline
-```
-
-##### Belli kullanıcıya ait commitleri görüntüler:
-```
-$ git log --author="username"
+**Belirli dosyadaki değişiklikleri göster:**
+```bash
+git log -p <file>
 ```
 
-##### Belirli bir dosya üzerinde zaman içinde meydana gelen değişiklikleri göstermektedir:
-```
-$ git log -p <file>
+### Gelişmiş Geçmiş
+
+**Dalları karşılaştır:**
+```bash
+git log --oneline <origin/master>..<remote/master> --left-right
 ```
 
-##### &lt;Dosyayı&gt; kimin ne zaman değiştirdiğini gösterir:
-```
-$ git blame <file>
-```
-
-##### Referans kayıtlarını gösterir:
-```
-$ git reflog show
+**Kim neyi ne zaman değiştirdi göster:**
+```bash
+git blame <file>
 ```
 
-##### Referans kayıtlarını siler:
-```
-$ git reflog delete
+### Referans Günlükleri
+
+**Referans günlüğünü göster:**
+```bash
+git reflog show
 ```
 
-<hr>
-
-## Taşı / Yeniden Adlandır
-
-##### Dosyayı yeniden adlandırmak:
-
-Index.txt'den Index.html'e
-
-```
-$ git mv Index.txt Index.html
+**Referans günlüğünü sil:**
+```bash
+git reflog delete
 ```
 
-<hr>
-## Branches & Tags
+---
 
-##### Tüm var olan branchleri listeler:
-```
-$ git branch
-```
+## 📁 Taşıma / Yeniden Adlandırma
 
-##### Ana branchi değiştirir:
-```
-$ git checkout <branch>
+**Bir dosyayı yeniden adlandır:**
+```bash
+git mv Index.txt Index.html
 ```
 
-##### Mevcut ana branchte yeni bir branch oluşturur:
-```
-$ git branch <new-branch>
+---
+
+## 🌿 Dallar ve Etiketler
+
+### Dalları Listeleme
+
+**Yerel dalları listele:**
+```bash
+git branch
 ```
 
-##### Remote branchte yeni bir izlenen branch oluşturur:
-```
-$ git branch --track <new-branch> <remote-branch>
-```
-
-##### Yerel branchi siler:
-```
-$ git branch -d <branch>
+**Tüm dalları listele (yerel + uzak):**
+```bash
+git branch -a
 ```
 
-##### Güncel commiti etiket ile işaretler:
-```
-$ git tag <tag-name>
-```
-
-##### `HEAD`i  etiket ile işaretler ve bir mesaj eklemek için yazı editörünü açar:
-```
-$ git tag -a <tag-name>
+**Uzak dalları listele:**
+```bash
+git branch -r
 ```
 
-##### `HEAD`i bir mesaj içermek şartı ile etiketler:
-```
-$ git tag <tag-name> -am 'message here'
-```
-
-##### Tüm etiketleri listeler:
-```
-$ git tag
+**Birleştirilmiş dalları listele:**
+```bash
+git branch --merged
 ```
 
-##### Tüm etiketleri mesajları ile listeler (etiket mesajı yoksa bir etiket mesajı yaz):
-```
-$ git tag -n
+### Dal Değiştirme ve Oluşturma
+
+**Mevcut dala geç:**
+```bash
+git checkout <branch>
 ```
 
-<hr>
-
-## Güncelleştirme & Yayınlama
-
-##### Yapılandırılmış tüm güncel remoteları listeler:
-```
-$ git remote -v
+**Yeni dal oluştur ve geç:**
+```bash
+git checkout -b <branch>
 ```
 
-##### Belirli bir &lt;remote&gt; hakkında bilgileri gösterir.:
-```
-$ git remote show <remote>
-```
-
-##### Yeni remote repository oluşturur, &lt;remote&gt; diye isimlendirir:
-```
-$ git remote add <remote> <url>
+**Önceki dala geç:**
+```bash
+git checkout -
 ```
 
-##### &lt;Remote&gt; da bulunan tüm değişiklikleri indirir, ama ana brachle birleştirmez:
-```
-$ git fetch <remote>
-```
-
-##### Değişiklikleri indirir ve doğrudan ana brache merge/integrate eder:
-```
-$ git remote pull <remote> <url>
+**Mevcut daldan yeni dal oluştur:**
+```bash
+git checkout -b <new_branch> <existing_branch>
 ```
 
-##### Tüm ana Branchteki değişiklikleri yerel repositorye ekler:
-```
-$ git pull origin master
-```
-
-##### Remote da bulunan repositorye(depoya), yerel değişiklikleri yayınlar:
-```
-$ git push remote <remote> <branch>
+**Belirli commit'ten dal oluştur:**
+```bash
+git checkout <commit-hash> -b <new_branch_name>
 ```
 
-##### Remote da bulunan bir branchi siler:
-```
-$ git push <remote> :<branch> (since Git v1.5.0)
-```
-ya da
-```
-$ git push <remote> --delete <branch> (since Git v1.7.0)
+**Geçiş yapmadan dal oluştur:**
+```bash
+git branch <new-branch>
 ```
 
-##### Etiketleri yayınlar:
-```
-$ git push --tags
-```
-
-<hr>
-
-## Merge & Rebase
-
-##### Seçili HEADinizi istediğiniz &lt;branch&gt;'e merge eder:
-```
-$ git merge <branch>
+**İzleme dalı oluştur:**
+```bash
+git branch --track <new-branch> <remote-branch>
 ```
 
-##### Seçili HEADinizi şimdiki &lt;branch&gt;'e rebase yapar<br>
-###### Yayınlanan committen sonra rebase yapmayın!
-```
-$ git rebase <branch>
+### Dal İşlemleri
+
+**Farklı daldan tek dosya al:**
+```bash
+git checkout <branch> -- <filename>
 ```
 
-##### Rebase iptal etmek:
-```
-$ git rebase --abort
-```
-
-##### Çakışmaları çözümledikten sonra rebase devam etmek:
-```
-$ git rebase --continue
+**Başka daldan belirli commit'i uygula:**
+```bash
+git cherry-pick <commit hash>
 ```
 
-##### Çakışmaları çözmek için yapılandırılmış birleştirme aracını kullanmak:
-```
-$ git mergetool
-```
-
-##### Editörünüzü kullanarak çakışmaları çözümledikten sonra dosyayı çözümlenmiş olarak ekleyin:
-```
-$ git add <resolved-file>
-```
-```
-$ git rm <resolved-file>
+**Mevcut dalı yeniden adlandır:**
+```bash
+git branch -m <new_branch_name>
 ```
 
-##### Commitleri birleştirmek:
-```
-$ git rebase -i <commit-just-before-first>
+**Yerel dalı sil:**
+```bash
+git branch -d <branch>
 ```
 
-Bu metni,
-
+**Yerel dalı zorla sil:**
+```bash
+git branch -D <branch>
 ```
+> ⚠️ **Uyarı:** Birleştirilmemiş değişiklikleri kaybedersiniz!
+
+### Etiketler
+
+**HEAD'de etiket oluştur:**
+```bash
+git tag <tag-name>
+```
+
+**Açıklamalı etiket oluştur:**
+```bash
+git tag -a <tag-name>
+```
+
+**Mesajlı etiket oluştur:**
+```bash
+git tag <tag-name> -am 'message here'
+```
+
+**Tüm etiketleri listele:**
+```bash
+git tag
+```
+
+**Etiketleri mesajlarıyla listele:**
+```bash
+git tag -n
+```
+
+---
+
+## 🔄 Güncelleme ve Yayınlama
+
+### Uzak Depo Yönetimi
+
+**Yapılandırılmış uzak depoları listele:**
+```bash
+git remote -v
+```
+
+**Uzak depo bilgisini göster:**
+```bash
+git remote show <remote>
+```
+
+**Yeni uzak depo ekle:**
+```bash
+git remote add <remote> <url>
+```
+
+**Uzak depoyu yeniden adlandır:**
+```bash
+git remote rename <remote> <new_remote>
+```
+
+**Uzak depoyu kaldır:**
+```bash
+git remote rm <remote>
+```
+> ℹ️ **Not:** Bu yalnızca yerel uzak referansı kaldırır, uzak deponun kendisini silmez.
+
+### Fetch ve Pull
+
+**Değişiklikleri birleştirmeden indir:**
+```bash
+git fetch <remote>
+```
+
+**Değişiklikleri indir ve birleştir:**
+```bash
+git pull <remote> <branch>
+```
+
+**Ana daldan değişiklikleri al:**
+```bash
+git pull origin master
+```
+
+**Rebase ile pull yap:**
+```bash
+git pull --rebase <remote> <branch>
+```
+
+### Push ve Yayınlama
+
+**Yerel değişiklikleri yayınla:**
+```bash
+git push <remote> <branch>
+```
+
+**Uzak dalı sil:**
+```bash
+# Git v1.7.0+
+git push <remote> --delete <branch>
+
+# Git v1.5.0+
+git push <remote> :<branch>
+```
+
+**Etiketleri yayınla:**
+```bash
+git push --tags
+```
+
+---
+
+## 🔀 Birleştirme ve Rebase
+
+### Birleştirme İşlemleri
+
+**Dalı mevcut HEAD'e birleştir:**
+```bash
+git merge <branch>
+```
+
+**Birleştirme aracını global olarak yapılandır:**
+```bash
+git config --global merge.tool meld
+```
+
+**Yapılandırılmış birleştirme aracını kullan:**
+```bash
+git mergetool
+```
+
+### Rebase İşlemleri
+
+> ⚠️ **Uyarı:** Yayınlanmış commit'leri rebase etmeyin!
+
+**Mevcut HEAD'i dal üzerine rebase et:**
+```bash
+git rebase <branch>
+```
+
+**Rebase'i iptal et:**
+```bash
+git rebase --abort
+```
+
+**Çakışmaları çözdükten sonra rebase'e devam et:**
+```bash
+git rebase --continue
+```
+
+### Çakışma Çözümü
+
+**Dosyayı çözüldü olarak işaretle:**
+```bash
+git add <resolved-file>
+```
+
+**Çözülen dosyayı kaldır:**
+```bash
+git rm <resolved-file>
+```
+
+### Commit'leri Birleştirme (Squash)
+
+**Squash için etkileşimli rebase:**
+```bash
+git rebase -i <commit-just-before-first>
+```
+
+**Örnek squash yapılandırması:**
+```
+# Önce
 pick <commit_id>
 pick <commit_id2>
 pick <commit_id3>
-```
 
-bu metin ile değiştirin,
-
-```
+# Sonra (commit_id2 ve commit_id3'ü commit_id ile birleştir)
 pick <commit_id>
 squash <commit_id2>
 squash <commit_id3>
 ```
 
-<hr>
+---
 
-## Geri Alma
+## ↩️ Geri Alma
 
-##### Çalışılan dosyadaki tüm yerel değişiklikleri kaldırır:
-```
-$ git reset --hard HEAD
-```
+### Değişiklikleri İptal Etme
 
-##### Evreleme alanı dışındaki tüm dosyaları alır(örnek: son git add'i geri alır):
-```
-$ git reset HEAD
+**Tüm yerel değişiklikleri iptal et:**
+```bash
+git reset --hard HEAD
 ```
 
-##### Belli bir dosyadaki yerel değişiklikleri kaldırır:
-```
-$ git checkout HEAD <file>
-```
-
-##### Silinen dosyayı geri döndürme dosyanın commit loglarının tutuluyor olması ile mümkündür:
-```
-$ git revert <commit>
+**Tüm dosyaları hazırlama alanından çıkar:**
+```bash
+git reset HEAD
 ```
 
-##### Belirlediğiniz HEADden bir önceki commite döner ve belirlemiş olduğunuz committe yaptığınız tüm değişiklikleri geri alır:
-```
-$ git reset --hard <commit>
-```
-
-##### Belirlediğiniz HEADden bir önceki commite döner ve belirlemiş olduğunuz committe yaptığınız tüm değişiklikleri untracked dosyalar arasına alır:
-```
-$ git reset <commit>
+**Belirli dosyadaki değişiklikleri iptal et:**
+```bash
+git checkout HEAD <file>
 ```
 
-##### Belirlediğiniz HEADden bir önceki commite döner ve yaptığınız tüm değişiklilkleri local commitlerinizi tutarak geri alır:
-```
-$ git reset --keep <commit>
-```
+### Sıfırlama İşlemleri
 
-
-##### Gitignore'a eklenmeden önce yanlışlıkla kaydedilmiş dosyaları kaldırın:
-```
-$ git rm -r --cached .
-$ git add .
-$ git commit -m "remove xyz file"
+**Önceki commit'e sıfırla (tüm değişiklikleri sil):**
+```bash
+git reset --hard <commit>
 ```
 
-<hr>
-
-## Git-Flow
-
-### Index
-* [Ayarlar](#ayarlar)
-* [Başlarken](#başlarken)
-* [Özellikler (Features)](#features)
-* [Bir Yayın Çıkarırken (Release)](#release)
-* [Hata Giderimleri (Hotfixes)](#hata-giderimleri)
-* [Komutlar (Commands)](#komutlar)
-
-<hr>
-
-### Ayarlar
-###### Git flow'u kullanabilmek için öncelikli olarak git kurulumunun yapılması gerekmektedir. Git flow OSX, Linux ve Windows üzerinde çalıştırılabilir.
-
-##### OSX Homebrew:
-```
-$ brew install git-flow
+**Uzak dal durumuna sıfırla:**
+```bash
+git reset --hard <remote/branch>
+# Örnek: git reset --hard upstream/master
 ```
 
-##### OSX Macports:
-```
-$ port install git-flow
-```
-
-##### Linux:
-```
-$ apt-get install git-flow
+**Değişiklikleri hazırlanmamış olarak koruyarak sıfırla:**
+```bash
+git reset <commit>
 ```
 
-##### Windows (Cygwin):
-###### Git flow kurulumu için wget ve util-linux gerekmektedir.
+**Kaydedilmemiş yerel değişiklikleri koruyarak sıfırla:**
+```bash
+git reset --keep <commit>
 ```
-$ wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/develop/contrib/gitflow-installer.sh | bash
+
+### Commit'leri Geri Alma
+
+**Commit'i geri al (ters değişikliklerle yeni commit oluştur):**
+```bash
+git revert <commit>
 ```
 
-<hr>
+### Yok Sayılan Dosyaları Temizleme
 
-### Başlarken
-###### Git flow, kullanmak istediğiniz projede ayarlarınızı özelleştirmek amacıyla başlatılır (initialize).
+**Yanlışlıkla kaydedilmiş, yok sayılması gereken dosyaları kaldır:**
+```bash
+git rm -r --cached .
+git add .
+git commit -m "remove ignored files"
+```
 
-##### Başlangıç (Initialize):
-###### Bu noktada kafanızda dallarınızı (branches) isimlendirme konusuna ilişkin birçok soru işareti oluşacaktır. Bu bağlamda varsayılan (default) değerleri kullanmanız önerilir.
-###### git flow'u kullanmak istediğiniz reponuzdayken:
-```shell
+---
+
+## 🌊 Git Flow
+
+**Geliştirilmiş Git-flow:** [git-flow-avh](https://github.com/petervanderdoes/gitflow-avh)
+
+### 📋 İçindekiler
+- [🔧 Kurulum](#-kurulum-1)
+- [🚀 Başlangıç](#-başlangıç)
+- [✨ Özellikler](#-özellikler)
+- [🎁 Sürüm Yayınlama](#-sürüm-yayınlama)
+- [🔥 Acil Düzeltmeler](#-acil-düzeltmeler)
+- [📊 Komutlara Genel Bakış](#-komutlara-genel-bakış)
+
+---
+
+### 🔧 Kurulum
+
+> **Ön Koşul:** Çalışan bir Git kurulumu gereklidir. Git-flow macOS, Linux ve Windows'ta çalışır.
+
+**macOS (Homebrew):**
+```bash
+brew install git-flow-avh
+```
+
+**macOS (MacPorts):**
+```bash
+port install git-flow
+```
+
+**Linux (Debian tabanlı):**
+```bash
+sudo apt-get install git-flow
+```
+
+**Windows (Cygwin):**
+> wget ve util-linux gerektirir
+```bash
+wget -q -O - --no-check-certificate https://raw.githubusercontent.com/petervanderdoes/gitflow/develop/contrib/gitflow-installer.sh install <state> | bash
+```
+
+---
+
+### 🚀 Başlangıç
+
+Git-flow, projenizi özelleştirmek için başlatma gerektirir.
+
+**Başlatma (etkileşimli):**
+```bash
 git flow init
 ```
-ya da
-###### varsayılan:
-```shell
+> Dal adlandırma kuralları hakkında sorular yanıtlayacaksınız. Varsayılan değerler önerilir.
+
+**Başlatma (varsayılanları kullan):**
+```bash
 git flow init -d
 ```
-<hr>
 
-### Özellikler (Features)
-###### Git flow ile yayınlamak üzere olduğunuz projenize ekleyeceğiniz özellikler için yeni dallarda (feature) kodlama yaparsınız. Genel olarak sadece geliştirici repolarında bulunurlar.
+---
 
-##### Yeni bir özellik eklemesi başlatmak (feature start):
-###### Yeni özelliklerin eklenmesi öncelikle develop dalından (branch) başlar.
-```
+### ✨ Özellikler
+
+Özellikler, gelecek sürümler için yeni işlevsellik geliştirmek içindir. Genellikle yalnızca geliştirici depolarında bulunurlar.
+
+**Yeni özellik başlat:**
+```bash
 git flow feature start MYFEATURE
 ```
-###### Bu komut bize develop dalını (branch) temel alan bir özellik dalı (feature) oluşturur. Ve bulunduğumuz dalı develop/MYFEATURE olarak değiştirir.
+> 'develop' dalını temel alan özellik dalı oluşturur ve ona geçiş yapar
 
-##### Bir özellik eklemesi bitirilirken (feature finish):
-###### Bir özelliğin eklenme işlemi bitirilirken şunları yapılır:
-###### 1)Kendi çalıştığımız özellik dalı (burada MYFEATURE) develop ana dalı ile birleştirilir.
-###### 2)Bu birleşmeden sonra kendi özellik dalımız (MYFEATURE) silinir.
-###### 3)Bulunduğumuz dal tekrar develop olarak değiştirilir.
-```
+**Özelliği tamamla:**
+```bash
 git flow feature finish MYFEATURE
 ```
+> Bu işlem:
+> 1. MYFEATURE'ı 'develop' dalına birleştirir
+> 2. Özellik dalını siler
+> 3. 'develop' dalına geri geçer
 
-##### Bir özelliği yayınlamak (Publish a feature):
-###### Bir ekip içerisinde geliştirme mi yapıyorsunuz? O zaman geliştirdiğiniz özelliği bir uzak sunucuya gönderin, böylelikle geliştirdiğiniz özellik diğer kullanıcılar tarafından kullanılabilir.
-```
+**Özelliği yayınla (iş birliği için):**
+```bash
 git flow feature publish MYFEATURE
 ```
 
-##### Yayınlanmış bir özelliği almak (Getting a published feature):
-###### Uzak sunucu üzerinde yayınlanmış bir özelliği kendi yerel (local) çalışma ortamınıza aktarırken:
-```
+**Yayınlanan özelliği al:**
+```bash
 git flow feature pull origin MYFEATURE
 ```
 
-<hr>
-
-### Bir Yayın Çıkarırken (Release)
-###### Yeni bir ürünün yayınlanmasına yardımcı olur. Küçük hata giderimleri ve meta-data hazırlığı için kullanılabilir.
-
-##### Bir sürüm yayınlamak (Start a release):
-###### Bu komut ile develop dalını temel kabul eden bir release dalı (branch) yaratılır.
-###### Opsiyonel olarak yayınınızın [BASE] noktasından başlamasını sağlayabilirsiniz. Bu commit develop dalında (branch) iken yapılmalıdır.
+**Origin özelliğini izle:**
+```bash
+git flow feature track MYFEATURE
 ```
+
+---
+
+### 🎁 Sürüm Yayınlama
+
+Sürümler, yeni üretim sürümlerinin hazırlanmasını destekler, küçük hata düzeltmeleri ve meta-veri hazırlığına olanak tanır.
+
+**Sürüm başlat:**
+```bash
 git flow release start RELEASE [BASE]
 ```
-###### Yayınlama dalınız (release branch) oluştuktan sonra bu yöntem ile diğer yazılımcılar tarafından yapılan release commitlerinin de kabul edilmesini sağlayabilirsiniz. Bunu özellik yayınlama (feature publishing) ile kolaylıkla yapabilirsiniz.
-```
+> 'develop' dalından sürüm dalı oluşturur. İsteğe bağlı olarak [BASE] commit SHA-1 belirtin.
+
+**Sürümü yayınla:**
+```bash
 git flow release publish RELEASE
 ```
-###### (Uzak sunucu üzerindeki yayınları ```git flow release track RELEASE``` ile izleyebilirsiniz. )
 
-##### Bir sürüm yayınını tamamlamak(Finish up a release):
-###### Bir sürüm yayınını tamamlarken git dallanmasının (branching) en büyük adımını atarız. Yayınlanma tamamlanırken:
-###### 1)Yayınlama yaptığımız dal olan release dalı (branch) master ana dalı ile birleştirilir.
-###### 2)Etiketler (tags) isimleri ile birlikte yayınlanır.
-###### 3)Arkaplandaki birleştirmeler (back-merges) develop dalında yayınlanır.
-###### 4)Yayınlama için açmış olduğumuz dal (branch) silinir.
+**Uzak sürümü izle:**
+```bash
+git flow release track RELEASE
 ```
+
+**Sürümü tamamla:**
+```bash
 git flow release finish RELEASE
 ```
-###### Ancak etiketlerinizi de eklemeyi unutmayın! ```git push --tags``` bu sorununuzu da halledecektir.
+> Bu işlem:
+> 1. Sürüm dalını 'master'a birleştirir
+> 2. Sürümü etiketler
+> 3. Sürümü 'develop'a geri birleştirir
+> 4. Sürüm dalını siler
 
-<hr>
+> 💡 **Unutmayın:** Etiketlerinizi `git push --tags` ile gönderin
 
-### Hata giderimleri (Hotfixes)
-###### Yayına çıkarılmış bir versiyonda istenmeyen durumlar ortaya çıktığında ani hata giderimi için kullanılır. Hotfixler, master ana dalı (branch)ındaki versiyon numarasını belirten etiketten dallanır (branching).
+---
 
-##### Bir hata giderimini başlatmak(git flow hotfix start):
-###### Diğer git flow komutlarında olduğu gibi bir hotfix başlatılırken:
+### 🔥 Acil Düzeltmeler
+
+Acil düzeltmeler, canlı üretim sürümlerindeki kritik sorunları giderir. Master üzerindeki ilgili etiketten dallanırlar.
+
+**Acil düzeltme başlat:**
+```bash
+git flow hotfix start VERSION [BASENAME]
 ```
-$ git flow hotfix start VERSION [BASENAME]
-```
-###### Versiyon argümanları yeni hotfix yayınının adını alır. Opsiyonel olarak başlangıç noktası için bir isim özelleştirmesi yapabilirsiniz (basename).
 
-##### Hata giderimi bitirme (Finish a hotfix):
-###### Bir hata giderimi tamamlanırken, develop ve master dalları ile birleştirilir. Ayrıca master dalına (branch) hotfix versiyonunun etiketi eklenir.
-```
+**Acil düzeltmeyi tamamla:**
+```bash
 git flow hotfix finish VERSION
 ```
+> Hem 'develop' hem de 'master'a geri birleştirir ve master birleştirmesini etiketler
 
-<hr>
+---
 
-### Komutlar (Commands)
-<p align="center">
-	<img alt="Git" src="../Img/git-flow-commands.png" height="270" width="460">
-</p>
-
-<hr>
-
-### Git flow şeması
+### 📊 Komutlara Genel Bakış
 
 <p align="center">
-	<img alt="Git" src="../Img/git-flow-commands-without-flow.png">
+    <img alt="Git Flow Komutları" src="../Img/git-flow-commands.png" height="270" width="460">
 </p>
 
-<hr>
+### 🌊 Git Flow Şeması
+
+<p align="center">
+    <img alt="Git Flow Şeması" src="../Img/git-flow-commands-without-flow.png">
+</p>
+
+---
+
+
+## 🌍 Diğer Diller
+
+Bu kopya kağıdı birçok dilde mevcuttur:
+
+| Dil | Bağlantı |
+|-----|----------|
+| 🇺🇸 İngilizce | [README.md](../README.md) |
+| 🇸🇦 Arapça | [git-cheat-sheet-ar.md](git-cheat-sheet-ar.md) |
+| 🇧🇩 Bengalce | [git-cheat-sheet-bn.md](git-cheat-sheet-bn.md) |
+| 🇧🇷 Brezilya Portekizcesi | [git-cheat-sheet-pt_BR.md](git-cheat-sheet-pt_BR.md) |
+| 🇨🇳 Çince | [git-cheat-sheet-zh.md](git-cheat-sheet-zh.md) |
+| 🇩🇪 Almanca | [git-cheat-sheet-de.md](git-cheat-sheet-de.md) |
+| 🇬🇷 Yunanca | [git-cheat-sheet-el.md](git-cheat-sheet-el.md) |
+| 🇮🇳 Hintçe | [git-cheat-sheet-hi.md](git-cheat-sheet-hi.md) |
+| 🇰🇷 Korece | [git-cheat-sheet-ko.md](git-cheat-sheet-ko.md) |
+| 🇵🇱 Lehçe | [git-cheat-sheet-pl.md](git-cheat-sheet-pl.md) |
+| 🇪🇸 İspanyolca | [git-cheat-sheet-es.md](git-cheat-sheet-es.md) |
+| 🇹🇷 Türkçe | **(mevcut)** |
+
+---
+
+## 🤝 Katkıda Bulunma
+
+Katkılarınızı bekliyoruz! Yapabilecekleriniz:
+
+- 🐛 Hataları veya yazım yanlışlarını bildirme
+- ✨ Yeni Git komutları ekleme
+- 🌍 Yeni dillere çevirme
+- 💡 Açıklamaları iyileştirme
+- 📝 Biçimlendirmeyi geliştirme
+
+**Nasıl katkıda bulunulur:**
+1. Bu depoyu fork edin
+2. Özellik dalınızı oluşturun (`git checkout -b feature/HarikaOzellik`)
+3. Değişikliklerinizi kaydedin (`git commit -m 'HarikaOzellik ekle'`)
+4. Dalınızı gönderin (`git push origin feature/HarikaOzellik`)
+5. Bir Pull Request açın
+
+---
+
+## 📄 Lisans
+
+Bu proje açık kaynaklıdır ve [MIT Lisansı](../LICENSE) altında kullanılabilir.
+
+---
+
+<p align="center">
+    <b>⭐ Bu depoyu faydalı bulduysanız yıldızlayın!</b>
+</p>
